@@ -3,17 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package com.mycompany.Modelo;
 
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  *
  * @author batoi
  */
+@Entity
 public class Tarea {
-    
+   @Id
+    @GeneratedValue
     private int id_tarea;
     private Date fecha_de_alta;
     private Date fecha_de_finalizacion;
@@ -79,6 +84,18 @@ public class Tarea {
     @Override
     public String toString() {
         return "Tarea " + "descripcion=" + descripcion;
+    }
+
+    public void setId(int i) {
+        this.id_tarea = i;
+    }
+
+    public void clone(Tarea t) {
+        this.fecha_de_alta = t.getFecha_de_alta();
+        this.fecha_de_finalizacion = t.getFecha_de_finalizacion();
+        this.descripcion = t.getDescripcion();
+        this.lista_subtareas = t.getLista_subtareas();
+    
     }
     
 }

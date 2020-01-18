@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package com.mycompany.Modelo;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -11,12 +11,19 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  *
  * @author batoi
  */
+@Entity
 public class Empleado {
+
+    @Id
+    @GeneratedValue
 
     private int id_Empleado;
     private String nombre;
@@ -62,6 +69,20 @@ public class Empleado {
     }
 
     public Empleado(Empleado empleado) {
+        this.nombre = empleado.getNombre();
+        this.primer_apellido = empleado.getPrimer_apellido();
+        this.segundo_apellido = empleado.getSegundo_apellido();
+        this.direccion = empleado.getDireccion();
+        this.telefono = empleado.getTelefono();
+        this.localidad = empleado.getLocalidad();
+        this.codigo_postal = empleado.getCodigo_postal();
+        this.esta_muerto = empleado.isEsta_muerto();
+        this.fecha_nacimiento = empleado.getFecha_nacimiento();
+        this.fecha_fallecimiento = empleado.getFecha_fallecimiento();
+        this.lista_tareas = empleado.getLista_tareas();
+    }
+
+    public void clone(Empleado empleado) {
         this.nombre = empleado.getNombre();
         this.primer_apellido = empleado.getPrimer_apellido();
         this.segundo_apellido = empleado.getSegundo_apellido();
@@ -185,11 +206,23 @@ public class Empleado {
             digest.update(texto.getBytes("utf8"));
             desencripcion = String.format("%040x", new BigInteger(1, digest.digest()));
         } catch (NoSuchAlgorithmException e) {
-          
+
         } catch (UnsupportedEncodingException e) {
-            
+
         }
         return desencripcion;
+
+    }
+
+    public void setIdEmpleado(int id_Empleado) {
+
+        this.id_Empleado = id_Empleado;
+
+    }
+
+    public void setContrasenya(String text) {
+
+        this.contrasenya = Empleado.desencriptar_contrasenya(text);
 
     }
 

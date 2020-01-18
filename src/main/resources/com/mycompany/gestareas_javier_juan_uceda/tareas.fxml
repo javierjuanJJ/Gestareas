@@ -5,17 +5,16 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestareas_javier_juan_uceda.Controlador_Aplicacion">
    <children>
       <GridPane layoutX="14.0" layoutY="6.0" prefHeight="148.0" prefWidth="433.0">
         <columnConstraints>
@@ -30,21 +29,20 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Nombre de usuario: " GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Contraseña: " GridPane.rowIndex="2" />
-            <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" text="Editar" GridPane.columnIndex="2" />
-            <Button mnemonicParsing="false" text="Entrar" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" text="Salir" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" text="Agregar" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label fx:id="label_Nombre_de_Usuario" text="Nombre de usuario: " GridPane.rowIndex="1" />
+            <TextField fx:id="TextField_nombre_de_usuario_login" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="label_Contrasenya" text="Contraseña: " GridPane.rowIndex="2" />
+            <PasswordField fx:id="TextField_contrasenya_login" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button id="informacion_usuario" fx:id="bt_parte_editar" mnemonicParsing="false" onAction="#poner_columnas" text="Editar" GridPane.columnIndex="2" />
+            <Button fx:id="bt_parte_entrar" mnemonicParsing="false" onAction="#iniciar_sesion" text="Entrar" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="bt_parte_salir" mnemonicParsing="false" onAction="#salir_de_la_sesion" text="Salir" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button id="informacion_usuario" fx:id="bt_parte_agregar" mnemonicParsing="false" onAction="#poner_columnas" text="Agregar" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <ComboBox layoutX="143.0" layoutY="231.0" prefWidth="150.0" />
-      <Label layoutX="51.0" layoutY="236.0" text="Tarea: " />
-      <ComboBox layoutX="143.0" layoutY="274.0" prefWidth="150.0" />
-      <Label layoutX="51.0" layoutY="279.0" text="Subtarea: " />
-      <ListView layoutX="51.0" layoutY="327.0" prefHeight="440.0" prefWidth="383.0" />
+      <ComboBox fx:id="ComboBox_Tareas" layoutX="143.0" layoutY="231.0" prefWidth="150.0" />
+      <Label fx:id="label_Tarea" layoutX="51.0" layoutY="236.0" text="Tarea: " />
+      <ComboBox fx:id="ComboBox_SubTareas" layoutX="143.0" layoutY="274.0" prefWidth="150.0" />
+      <Label fx:id="label_SubTarea" layoutX="51.0" layoutY="279.0" text="Subtarea: " />
       <GridPane layoutX="451.0" layoutY="406.0" prefHeight="311.0" prefWidth="610.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="108.0" minWidth="10.0" prefWidth="48.0" />
@@ -62,19 +60,19 @@
             <RowConstraints maxHeight="197.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <CheckBox mnemonicParsing="false" text="Realizada la tarea" GridPane.columnIndex="2" />
-            <Label text="Compartir a: " GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" text="Compartir" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <DatePicker GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <DatePicker GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <CheckBox fx:id="CheckBox_Realizada_la_tarea" mnemonicParsing="false" text="Realizada la tarea" GridPane.columnIndex="2" />
+            <Label fx:id="label_Compartir_a" text="Compartir a: " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="ComboBox_Empleados_Compartir" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="bt_compartir" mnemonicParsing="false" onAction="#compartir_tarea" text="Compartir" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <DatePicker fx:id="fecha_de_nacimiento_tarea" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <DatePicker fx:id="fecha_de_finalizacion_tarea" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <TextArea prefHeight="102.0" prefWidth="296.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" text="Insertar tarea" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" text="Modificar tarea" GridPane.columnIndex="3" />
-            <Button mnemonicParsing="false" text="Eliminar tarea" GridPane.columnIndex="4" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Label text="Añadir subtarea a: " GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" text="Añadir una subtarea" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <Button fx:id="bt_insertar_tarea" mnemonicParsing="false" onAction="#insertar_tarea" text="Insertar tarea" GridPane.columnIndex="1" />
+            <Button fx:id="bt_modificar_tarea" mnemonicParsing="false" onAction="#modificar_tarea" text="Modificar tarea" GridPane.columnIndex="3" />
+            <Button fx:id="bt_eliminar_tarea" mnemonicParsing="false" onAction="#eliminar_tarea" text="Eliminar tarea" GridPane.columnIndex="4" />
+            <ComboBox fx:id="ComboBox_Empleados_subtareas" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label fx:id="label_anyadir_subtarea_a" text="Añadir subtarea a: " GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="bt_anyadir_una_subtarea" mnemonicParsing="false" text="Añadir una subtarea" GridPane.columnIndex="3" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <GridPane layoutX="434.0" layoutY="26.0" prefHeight="311.0" prefWidth="610.0">
@@ -94,25 +92,29 @@
             <RowConstraints maxHeight="197.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" text="Insertar empleado" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" text="Modificar empleado" GridPane.columnIndex="3" />
-            <Button mnemonicParsing="false" text="Eliminar empleado" GridPane.columnIndex="4" />
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Label text="Nombre de usuario: " GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Primer apellido: " GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Segundo Apellido: " GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label text="Direccion: " GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="Telefono" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label text="Localidad: " GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Label text="Fecha de nacimiento: " GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button fx:id="bt_insertar_empleado" mnemonicParsing="false" onAction="#insertar_empleado" prefHeight="26.0" prefWidth="147.0" text="Insertar empleado" GridPane.columnIndex="1" />
+            <Button fx:id="bt_modificar_empleado" mnemonicParsing="false" onAction="#modificar_empleado" text="Modificar empleado" GridPane.columnIndex="3" />
+            <Button fx:id="bt_eliminar_empleado" mnemonicParsing="false" onAction="#eliminar_empleado" text="Eliminar empleado" GridPane.columnIndex="4" />
+            <TextField fx:id="TextField_nombre_de_usuario" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="TextField_primer_apellido" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="TextField_segundo_apellido" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="TextField_direccion" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="TextField_telefono" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <TextField fx:id="TextField_localidad" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Label fx:id="label_Columna_Datos_Nombre_de_Usuario" text="Nombre de usuario: " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="label_Columna_Datos_Primer_Apellido" text="Primer apellido: " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="label_Columna_Datos_Segundo_Apellido" text="Segundo Apellido: " GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="label_Columna_Datos_Direccion" text="Direccion: " GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="label_Columna_Datos_Telefono" text="Telefono" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="label_Columna_Datos_Localidad" text="Localidad: " GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="label_Columna_Fecha_de_nacimiento" text="Fecha de nacimiento: " GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <Label GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <DatePicker fx:id="fecha_de_nacimiento_login" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label fx:id="label_Contrasenya1" text="Contraseña: " GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <PasswordField fx:id="TextField_contrasenya_login1" GridPane.columnIndex="4" GridPane.rowIndex="3" />
          </children>
       </GridPane>
+      <TreeView fx:id="treeview_vista" layoutX="97.0" layoutY="337.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label fx:id="label_informacion_login" layoutX="467.0" layoutY="6.0" prefHeight="16.0" prefWidth="376.0" text="Label" />
    </children>
 </AnchorPane>
