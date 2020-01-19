@@ -39,7 +39,7 @@
             <Button id="informacion_usuario" fx:id="bt_parte_agregar" mnemonicParsing="false" onAction="#poner_columnas" text="Agregar" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <ComboBox fx:id="ComboBox_Tareas" layoutX="143.0" layoutY="231.0" prefWidth="150.0" />
+      <ComboBox fx:id="ComboBox_Tareas" layoutX="143.0" layoutY="231.0" onAction="#Accion_tareas_y_subtareas" onMouseClicked="#Llenar_tareas_y_subtareas" prefWidth="150.0" />
       <Label fx:id="label_Tarea" layoutX="51.0" layoutY="236.0" text="Tarea: " />
       <ComboBox fx:id="ComboBox_SubTareas" layoutX="143.0" layoutY="274.0" prefWidth="150.0" />
       <Label fx:id="label_SubTarea" layoutX="51.0" layoutY="279.0" text="Subtarea: " />
@@ -66,13 +66,13 @@
             <Button fx:id="bt_compartir" mnemonicParsing="false" onAction="#compartir_tarea" text="Compartir" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <DatePicker fx:id="fecha_de_nacimiento_tarea" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <DatePicker fx:id="fecha_de_finalizacion_tarea" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <TextArea prefHeight="102.0" prefWidth="296.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextArea fx:id="TextArea_Descripcion" prefHeight="102.0" prefWidth="296.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <Button fx:id="bt_insertar_tarea" mnemonicParsing="false" onAction="#insertar_tarea" text="Insertar tarea" GridPane.columnIndex="1" />
             <Button fx:id="bt_modificar_tarea" mnemonicParsing="false" onAction="#modificar_tarea" text="Modificar tarea" GridPane.columnIndex="3" />
             <Button fx:id="bt_eliminar_tarea" mnemonicParsing="false" onAction="#eliminar_tarea" text="Eliminar tarea" GridPane.columnIndex="4" />
-            <ComboBox fx:id="ComboBox_Empleados_subtareas" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <ComboBox fx:id="ComboBox_Empleados_subtareas" onMouseClicked="#Llenar_tareas_y_subtareas" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Label fx:id="label_anyadir_subtarea_a" text="Añadir subtarea a: " GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="bt_anyadir_una_subtarea" mnemonicParsing="false" text="Añadir una subtarea" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <Button fx:id="bt_anyadir_una_subtarea" mnemonicParsing="false" onAction="#Anyadir_una_subtarea" text="Añadir una subtarea" GridPane.columnIndex="3" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <GridPane layoutX="434.0" layoutY="26.0" prefHeight="311.0" prefWidth="610.0">

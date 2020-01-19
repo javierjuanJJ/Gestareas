@@ -33,7 +33,7 @@ public class EmpleadosDAO implements GenericoDAO<Empleado> {
     }
     
     public Empleado findByPK(int id) throws Exception {
-        TypedQuery<Empleado> query = conexion.createQuery("SELECT c FROM Tarea c WHERE c.id_Empleado= " + id, Empleado.class);
+        TypedQuery<Empleado> query = conexion.createQuery("SELECT c FROM Empleado c WHERE c.id_Empleado= " + id, Empleado.class);
         List<Empleado> Articulos_recibidos = query.getResultList();
         return Articulos_recibidos.get(0);
     }
@@ -60,10 +60,11 @@ public class EmpleadosDAO implements GenericoDAO<Empleado> {
     
     @Override
     public boolean update(Empleado t) throws Exception {
-        Empleado employee = conexion.find(Empleado.class, t.getId());
+        Empleado employee = this.findByPK(t.getId());
         conexion.getTransaction().begin();
         employee.clone(t);
         conexion.getTransaction().commit();
+        Controlador_Aplicacion.empleado = new Empleado(employee);
         return true;
     }
     
@@ -78,17 +79,17 @@ public class EmpleadosDAO implements GenericoDAO<Empleado> {
     
     public boolean inicio_sesion(String nombre_de_usuario, String contrasenya) throws Exception {
         String contrasenya_encriptado = Empleado.desencriptar_contrasenya(contrasenya);
-        boolean inicio_de_sesion = true;
+        boolean inicio_de_sesion = false;
         List<Empleado> lista_empleados = findAll();
         
         for (int contador = 0; contador < lista_empleados.size(); contador++) {
-            
+            String contrasenya_a_comparar = Empleado.desencriptar_contrasenya(lista_empleados.get(contador).getContrasenya());
             boolean nombre_igual = (lista_empleados.get(contador).getNombre().equals(nombre_de_usuario));
-            boolean contrasenya_igual = (lista_empleados.get(contador).getContrasenya().equals(contrasenya_encriptado));
+            boolean contrasenya_igual = (contrasenya_a_comparar.equals(contrasenya_encriptado));
             if ((nombre_igual) && (contrasenya_igual)) {
-                inicio_de_sesion = false;
-                contador = lista_empleados.size();
+                inicio_de_sesion = true;
                 Controlador_Aplicacion.empleado = new Empleado(lista_empleados.get(contador));
+                contador = lista_empleados.size();
             }
         }
         

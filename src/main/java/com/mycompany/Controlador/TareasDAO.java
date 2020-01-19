@@ -7,6 +7,7 @@ package com.mycompany.Controlador;
 
 import com.mycompany.Modelo.Empleado;
 import com.mycompany.Modelo.Tarea;
+import com.mycompany.gestareas_javier_juan_uceda.Controlador_Aplicacion;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -59,15 +60,18 @@ public class TareasDAO implements GenericoDAO<Tarea> {
         conexion.getTransaction().begin();
         conexion.persist(t);
         conexion.getTransaction().commit();
+        System.out.println(t.getId_tarea());
+        Controlador_Aplicacion.tarea_seleccionada = new Tarea(t);
         return true;
     }
 
     @Override
     public boolean update(Tarea t) throws Exception {
-        Tarea employee = conexion.find(Tarea.class, t.getId_tarea());
+        Tarea employee = findByPK(t.getId_tarea());
         conexion.getTransaction().begin();
         employee.clone(t);
         conexion.getTransaction().commit();
+        Controlador_Aplicacion.tarea_seleccionada = new Tarea(employee);
         return true;
     }
 

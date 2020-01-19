@@ -23,6 +23,7 @@ public class Tarea {
     private Date fecha_de_alta;
     private Date fecha_de_finalizacion;
     private String descripcion;
+    private boolean esta_realizada;
     private ArrayList<Tarea> lista_subtareas;
     
     public Tarea(Date fecha_de_alta, Date fecha_de_finalizacion, String descripcion, ArrayList<Tarea> lista_subtareas) {
@@ -40,10 +41,12 @@ public class Tarea {
     }
     
     public Tarea(Tarea tarea) {
+        this.id_tarea = tarea.getId_tarea();
         this.fecha_de_alta = tarea.getFecha_de_alta();
         this.fecha_de_finalizacion = tarea.getFecha_de_finalizacion();
         this.descripcion = tarea.getDescripcion();
         this.lista_subtareas = tarea.getLista_subtareas();
+        this.esta_realizada = tarea.isEsta_realizada();
     }
 
     public ArrayList<Tarea> getLista_subtareas() {
@@ -55,6 +58,14 @@ public class Tarea {
 
     public void setLista_subtareas(ArrayList<Tarea> lista_subtareas) {
         this.lista_subtareas = lista_subtareas;
+    }
+    
+    public boolean isEsta_realizada() {
+        return esta_realizada;
+    }
+
+    public void setEsta_realizada(boolean esta_realizada) {
+        this.esta_realizada = esta_realizada;
     }
 
     public Date getFecha_de_alta() {

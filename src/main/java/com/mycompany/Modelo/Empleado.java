@@ -80,6 +80,7 @@ public class Empleado {
         this.fecha_nacimiento = empleado.getFecha_nacimiento();
         this.fecha_fallecimiento = empleado.getFecha_fallecimiento();
         this.lista_tareas = empleado.getLista_tareas();
+        this.id_Empleado = empleado.getId();
     }
 
     public void clone(Empleado empleado) {
@@ -89,11 +90,10 @@ public class Empleado {
         this.direccion = empleado.getDireccion();
         this.telefono = empleado.getTelefono();
         this.localidad = empleado.getLocalidad();
-        this.codigo_postal = empleado.getCodigo_postal();
-        this.esta_muerto = empleado.isEsta_muerto();
         this.fecha_nacimiento = empleado.getFecha_nacimiento();
-        this.fecha_fallecimiento = empleado.getFecha_fallecimiento();
         this.lista_tareas = empleado.getLista_tareas();
+        this.contrasenya = empleado.getContrasenya();
+        this.id_Empleado = empleado.getId();
     }
 
     public String getNombre() {
@@ -201,7 +201,6 @@ public class Empleado {
         MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("SHA-1");
-
             digest.reset();
             digest.update(texto.getBytes("utf8"));
             desencripcion = String.format("%040x", new BigInteger(1, digest.digest()));
@@ -221,9 +220,7 @@ public class Empleado {
     }
 
     public void setContrasenya(String text) {
-
-        this.contrasenya = Empleado.desencriptar_contrasenya(text);
-
+        this.contrasenya = text;
     }
 
 }
