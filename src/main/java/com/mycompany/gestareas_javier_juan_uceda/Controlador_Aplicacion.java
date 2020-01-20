@@ -294,8 +294,6 @@ public class Controlador_Aplicacion {
             if (!tarea.equals(new Tarea())) {
                 TreeItem<Tarea> item = new TreeItem<Tarea>();
                 item.setValue(tarea);
-
-                System.out.println("Id tarea " + tarea.getId_tarea() + " es igual a por defecto " + tarea.equals(new Tarea()));
                 rootItem.getChildren().add(item);
                 if (tarea.getLista_subtareas().size() >= 0) {
                     rootItem.getChildren().add(crear_vista_arbol(tarea.getLista_subtareas()));
