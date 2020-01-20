@@ -34,6 +34,7 @@ public class Tarea {
     }
     
     public Tarea() {
+        this.id_tarea = 0;
         this.fecha_de_alta = new Date();
         this.fecha_de_finalizacion = new Date();
         this.descripcion = "";
@@ -92,9 +93,14 @@ public class Tarea {
         this.descripcion = descripcion;
     }
     
+    public boolean equals(Tarea tarea){
+
+        return this.id_tarea == tarea.getId_tarea() || this.descripcion.equals("");
+    }
+    
     @Override
     public String toString() {
-        return "Tarea " + "descripcion=" + descripcion;
+        return this.equals(new Tarea()) ? "" : "Tarea " + "descripcion=" + descripcion;
     }
 
     public void setId(int i) {

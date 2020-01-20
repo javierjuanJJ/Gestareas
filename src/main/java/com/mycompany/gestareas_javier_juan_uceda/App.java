@@ -39,6 +39,14 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+    
+    public static void Cambiar_Pantalla() throws IOException {
+		scene = new Scene(loadFXML("tareas.fxml"));
+		Stage.setScene(scene);
+		Stage.setTitle("Pantalla inicial");
+		Stage.show();
+        
+	}
 
     public void mensajeExcepcion(Exception ex, String msg) {
         Alert alert = new Alert(AlertType.ERROR);

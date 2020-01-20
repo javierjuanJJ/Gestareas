@@ -114,7 +114,7 @@
             <PasswordField fx:id="TextField_contrasenya_login1" GridPane.columnIndex="4" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <TreeView fx:id="treeview_vista" layoutX="97.0" layoutY="337.0" prefHeight="200.0" prefWidth="200.0" />
+      <TreeView fx:id="treeview_vista" layoutX="97.0" layoutY="337.0" onMouseClicked="#Poner_tarea_tree" prefHeight="200.0" prefWidth="200.0" />
       <Label fx:id="label_informacion_login" layoutX="467.0" layoutY="6.0" prefHeight="16.0" prefWidth="376.0" text="Label" />
    </children>
 </AnchorPane>
