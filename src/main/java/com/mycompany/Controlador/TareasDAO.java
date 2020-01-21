@@ -60,7 +60,7 @@ public class TareasDAO implements GenericoDAO<Tarea> {
         conexion.getTransaction().begin();
         conexion.persist(t);
         conexion.getTransaction().commit();
-        System.out.println(t.getId_tarea());
+        //System.out.println(t.getId_tarea());
         Controlador_Aplicacion.tarea_seleccionada = new Tarea(t);
         return true;
     }

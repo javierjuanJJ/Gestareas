@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author batoi
  */
 @Entity
-public class Tarea {
+public class Tarea implements Comparable<Tarea>  {
    @Id
     @GeneratedValue
     private int id_tarea;
@@ -112,6 +112,12 @@ public class Tarea {
         this.fecha_de_finalizacion = t.getFecha_de_finalizacion();
         this.descripcion = t.getDescripcion();
         this.lista_subtareas = t.getLista_subtareas();
+    
+    }
+
+    @Override
+    public int compareTo(Tarea t) {
+        return getFecha_de_alta().compareTo(t.getFecha_de_alta());
     
     }
     

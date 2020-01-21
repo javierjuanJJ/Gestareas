@@ -7,10 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
@@ -24,9 +28,13 @@ public class App extends Application {
 
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("tareas.fxml"));
+        
         stage.setScene(scene);
         Stage = stage;
         Stage.setTitle("Pantalla inicial");
+        
+        
+        
         Stage.show();
 
     }
