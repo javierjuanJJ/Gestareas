@@ -189,10 +189,10 @@ public class Controlador_Aplicacion {
 
             }
         } catch (Exception ex) {
-            
+
         }
     }
-    
+
     @FXML
     public void insertar_empleado() {
         try {
@@ -274,15 +274,13 @@ public class Controlador_Aplicacion {
         Tarea tarea = new Tarea(ComboBox_Empleados_subtareas.getSelectionModel().getSelectedItem());
 
         try {
-            tarea.getLista_subtareas().add(tarea_seleccionada);           
+            tarea.getLista_subtareas().add(tarea_seleccionada);
             conexionTareas.update(tarea);
             Collections.sort((empleado.getLista_tareas()));
             Llenar_tree();
         } catch (Exception ex) {
 
         }
-        
-        
 
     }
 
@@ -292,7 +290,7 @@ public class Controlador_Aplicacion {
 
         for (Tarea tarea : lista_tareas) {
 
-            if (!tarea.equals(new Tarea())) {
+            if ((!tarea.equals(new Tarea())) && (tarea.esta_entre(new Date()))) {
                 TreeItem<Tarea> item = new TreeItem();
                 item.setValue(tarea);
                 rootItem.getChildren().add(item);
@@ -310,13 +308,12 @@ public class Controlador_Aplicacion {
         try {
             Tarea tarea = coger_informacion_de_la_tarea(true);
             conexionTareas.insert(tarea);
-            
+
             if (!subtarea) {
                 empleado.getLista_tareas().add(tarea_seleccionada);
             }
-            
+
             //System.out.println(tarea_seleccionada.getDescripcion() + " " + tarea_seleccionada.getId_tarea());
-            
             conexionEmpleados.update(empleado);
             Collections.sort((empleado.getLista_tareas()));
             ArrayList<Tarea> lista_tareas = empleado.getLista_tareas();
@@ -325,7 +322,7 @@ public class Controlador_Aplicacion {
             this.Llenar_tree();
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+
         }
 
     }
@@ -378,10 +375,11 @@ public class Controlador_Aplicacion {
                 Tarea_creada.setId(tarea_seleccionada.getId_tarea());
                 Tarea_creada.setLista_subtareas(tarea_seleccionada.getLista_subtareas());
             }
-                Tarea_creada.setDescripcion(TextArea_Descripcion.getText());
-                Tarea_creada.setEsta_realizada(CheckBox_Realizada_la_tarea.isPressed());
-                Tarea_creada.setFecha_de_alta(Date.from(Instant.from(fecha_de_nacimiento_tarea.getValue().atStartOfDay(ZoneId.systemDefault()))));
-                Tarea_creada.setFecha_de_finalizacion(Date.from(Instant.from(fecha_de_finalizacion_tarea.getValue().atStartOfDay(ZoneId.systemDefault()))));
+            Tarea_creada.setDescripcion(TextArea_Descripcion.getText());
+
+            Tarea_creada.setEsta_realizada(CheckBox_Realizada_la_tarea.isSelected());
+            Tarea_creada.setFecha_de_alta(Date.from(Instant.from(fecha_de_nacimiento_tarea.getValue().atStartOfDay(ZoneId.systemDefault()))));
+            Tarea_creada.setFecha_de_finalizacion(Date.from(Instant.from(fecha_de_finalizacion_tarea.getValue().atStartOfDay(ZoneId.systemDefault()))));
         } else {
             Tarea_creada = new Tarea(tarea_seleccionada);
 
@@ -401,15 +399,15 @@ public class Controlador_Aplicacion {
 
         try {
             conexionTareas.update(coger_informacion_de_la_tarea(true));
-Collections.sort((empleado.getLista_tareas()));
+            Collections.sort((empleado.getLista_tareas()));
             ArrayList<Tarea> lista_tareas = empleado.getLista_tareas();
-            
-            for (Tarea tarea: lista_tareas){
+
+            for (Tarea tarea : lista_tareas) {
                 if (tarea.equals(tarea_seleccionada)) {
                     tarea.clone(tarea_seleccionada);
                 }
             }
-            
+
             ComboBox_Tareas.getItems().setAll(lista_tareas);
             ComboBox_Empleados_Compartir.getItems().setAll(conexionEmpleados.findAll());
             tareas_lista = Llenar_lista_tareas(lista_tareas);
@@ -429,13 +427,13 @@ Collections.sort((empleado.getLista_tareas()));
             //tarea_seleccionada.setId(0);                
             ArrayList<Tarea> lista_tareas = empleado.getLista_tareas();
             lista_tareas.remove(tarea_seleccionada);
-            
+
             ComboBox_Tareas.getItems().setAll(lista_tareas);
             tareas_lista = Llenar_lista_tareas(lista_tareas);
             Llenar_tree();
 
         } catch (Exception ex) {
-            
+
         }
 
     }
@@ -443,7 +441,7 @@ Collections.sort((empleado.getLista_tareas()));
     @FXML
     public void compartir_tarea() {
         Empleado Otro_Empleado = new Empleado(ComboBox_Empleados_Compartir.getSelectionModel().getSelectedItem());
-        Tarea tarea = new Tarea(ComboBox_Tareas.getSelectionModel().getSelectedItem());
+        Tarea tarea = new Tarea(tarea_seleccionada);
 
         Otro_Empleado.getLista_tareas().add(tarea);
         try {
@@ -598,7 +596,7 @@ Collections.sort((empleado.getLista_tareas()));
 
         for (Tarea tarea : lista_tareas) {
 
-            if (!tarea.equals(new Tarea())) {  
+            if ((!tarea.equals(new Tarea())) && (tarea.esta_entre(new Date()))) {
                 rootItem.add(new Tarea());
                 rootItem.add(tarea);
                 if (tarea.getLista_subtareas().size() >= 0) {
