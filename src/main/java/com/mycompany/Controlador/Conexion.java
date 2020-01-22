@@ -14,11 +14,13 @@ public class Conexion {
 
     public static EntityManagerFactory getConnectionemf() throws Exception {
 
-        try {
-            emf = Persistence.createEntityManagerFactory(url);
-        } catch (PersistenceException e) {
-            System.err.println(e.getMessage());
-            System.exit(1);
+        if (emf == null) {
+            try {
+                emf = Persistence.createEntityManagerFactory(url);
+            } catch (PersistenceException e) {
+                System.err.println(e.getMessage());
+                System.exit(1);
+            }
         }
 
         return emf;
@@ -27,11 +29,13 @@ public class Conexion {
 
     public static EntityManager getConnectionem() throws Exception {
 
-        try {
-            em = emf.createEntityManager();
-        } catch (PersistenceException e) {
-            System.err.println(e.getMessage());
-            System.exit(1);
+        if (em == null) {
+            try {
+                em = emf.createEntityManager();
+            } catch (PersistenceException e) {
+                System.err.println(e.getMessage());
+                System.exit(1);
+            }
         }
 
         return em;
