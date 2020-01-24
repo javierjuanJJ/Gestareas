@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane fx:id="escritorio" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0" prefWidth="747.0" styleClass="fondo" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestareas_javier_juan_uceda.Controlador_perfil_Usuario">
+   <children>
+      <GridPane layoutX="35.0" layoutY="22.0" prefHeight="188.0" prefWidth="610.0" stylesheets="@estilo.css">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="160.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="128.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="215.0" minWidth="10.0" prefWidth="149.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.0" minWidth="10.0" prefWidth="147.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="86.0" minHeight="4.0" prefHeight="46.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="97.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="237.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="bt_insertar_empleado" mnemonicParsing="false" onAction="#insertar_empleado" prefHeight="26.0" prefWidth="147.0" styleClass="botones_modificar" stylesheets="@estilo.css" text="Insertar empleado" />
+            <Button fx:id="bt_modificar_empleado" mnemonicParsing="false" onAction="#modificar_empleado" styleClass="botones_modificar" stylesheets="@estilo.css" text="Modificar empleado" GridPane.columnIndex="2" />
+            <Button fx:id="bt_eliminar_empleado" mnemonicParsing="false" onAction="#eliminar_empleado" styleClass="botones_modificar" stylesheets="@estilo.css" text="Eliminar empleado" GridPane.columnIndex="3" />
+            <TextField fx:id="TextField_nombre_de_usuario" styleClass="texfield_modificar" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="TextField_primer_apellido" styleClass="texfield_modificar" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="TextField_segundo_apellido" styleClass="texfield_modificar" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="TextField_direccion" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="TextField_telefono" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <TextField fx:id="TextField_localidad" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="label_Columna_Datos_Nombre_de_Usuario" stylesheets="@estilo.css" text="Nombre de usuario: " GridPane.rowIndex="1" />
+            <Label fx:id="label_Columna_Datos_Primer_Apellido" stylesheets="@estilo.css" text="Primer apellido: " GridPane.rowIndex="2" />
+            <Label fx:id="label_Columna_Datos_Segundo_Apellido" stylesheets="@estilo.css" text="Segundo Apellido: " GridPane.rowIndex="3" />
+            <Label fx:id="label_Columna_Datos_Direccion" stylesheets="@estilo.css" text="Direccion: " GridPane.rowIndex="4" />
+            <Label fx:id="label_Columna_Datos_Telefono" stylesheets="@estilo.css" text="Telefono" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label fx:id="label_Columna_Datos_Localidad" stylesheets="@estilo.css" text="Localidad: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="label_Columna_Fecha_de_nacimiento" stylesheets="@estilo.css" text="Fecha de nacimiento: " GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label stylesheets="@estilo.css" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <DatePicker fx:id="fecha_de_nacimiento_login" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label fx:id="label_Contrasenya1" stylesheets="@estilo.css" text="Contraseña: " GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <PasswordField fx:id="TextField_contrasenya_login1" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <Label fx:id="label_informacion_login" layoutX="467.0" layoutY="6.0" prefHeight="16.0" prefWidth="376.0" stylesheets="@estilo.css" text="Label" />
+      <Button layoutX="29.0" layoutY="240.0" mnemonicParsing="false" onAction="#salir_de_la_sesion" text="Volver a la pantalla de tareas" />
+   </children>
+</AnchorPane>

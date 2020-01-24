@@ -97,7 +97,7 @@ public class Tarea implements Comparable<Tarea> {
 
     public boolean equals(Tarea tarea) {
 
-        return this.id_tarea == tarea.getId_tarea() || this.descripcion.equals("");
+        return id_tarea == tarea.getId_tarea() || this.descripcion.equals("");
     }
 
     @Override
@@ -105,8 +105,8 @@ public class Tarea implements Comparable<Tarea> {
         return this.equals(new Tarea()) ? "" : descripcion;
     }
 
-    public void setId(int i) {
-        this.id_tarea = i;
+    public void setId(int id_Empleado) {
+        this.id_tarea = id_Empleado;
     }
 
     public void clone(Tarea t) {

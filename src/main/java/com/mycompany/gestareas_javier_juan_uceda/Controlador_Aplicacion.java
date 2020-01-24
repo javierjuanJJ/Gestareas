@@ -15,6 +15,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -41,7 +43,8 @@ public class Controlador_Aplicacion {
     private ArrayList<Tarea> tareas_lista;
     private EmpleadosDAO conexionEmpleados;
     private TareasDAO conexionTareas;
-    private static boolean subtarea = false;
+    public static boolean subtarea = false;
+    public static boolean nuevo_usuario = false;
     @FXML
     private Label label_Nombre_de_Usuario;
     @FXML
@@ -138,7 +141,14 @@ public class Controlador_Aplicacion {
         conexionEmpleados = new EmpleadosDAO();
         conexionTareas = new TareasDAO();
         tareas_lista = new ArrayList();
-        ocultar_desocultar("login");
+        //ocultar_desocultar("login");
+        if (nuevo_usuario) {
+            coger_informacion_de_empleado(false);
+        }
+        
+        if (empleado != null) {
+            actualizar_vista_usuario();
+        }
 
     }
 
@@ -170,29 +180,11 @@ public class Controlador_Aplicacion {
         try {
             conexionEmpleados.update(empleado);
             Collections.sort((empleado.getLista_tareas()));
+            TextField_nombre_de_usuario_login.setText(empleado.getNombre());
             ArrayList<Tarea> lista_tareas = empleado.getLista_tareas();
             ComboBox_Empleados_Compartir.getItems().setAll(conexionEmpleados.findAll());
             tareas_lista = Llenar_lista_tareas(lista_tareas);
             Llenar_tree();
-            coger_informacion_de_empleado(false);
-        } catch (Exception ex) {
-
-        }
-    }
-
-    @FXML
-    public void insertar_empleado() {
-        try {
-            conexionEmpleados.insert(coger_informacion_de_empleado(true));
-        } catch (Exception ex) {
-
-        }
-    }
-
-    @FXML
-    public void modificar_empleado() {
-        try {
-            conexionEmpleados.update(coger_informacion_de_empleado(true));
         } catch (Exception ex) {
 
         }
@@ -202,18 +194,8 @@ public class Controlador_Aplicacion {
     public void salir_de_la_sesion() {
         try {
             empleado = null;
-            App.Cambiar_Pantalla();
+            App.Cambiar_Pantalla("tareas.fxml");
         } catch (IOException ex) {
-
-        }
-    }
-
-    @FXML
-    public void eliminar_empleado() {
-        try {
-            conexionEmpleados.delete(empleado.getId());
-            salir_de_la_sesion();
-        } catch (Exception ex) {
 
         }
     }
@@ -290,7 +272,21 @@ public class Controlador_Aplicacion {
 
     @FXML
     public void poner_columnas() {
-        ocultar_desocultar("informacion_usuario");
+        try {
+            App.Cambiar_Pantalla("tarea");
+            nuevo_usuario = true;
+        } catch (IOException ex) {
+           ex.printStackTrace();
+        }
+    }
+    @FXML
+    public void poner_perfil() {
+        try {
+            App.Cambiar_Pantalla("perfil");
+            nuevo_usuario = false;
+        } catch (IOException ex) {
+           ex.printStackTrace();
+        }
     }
 
     private Empleado coger_informacion_de_empleado(boolean coger) {

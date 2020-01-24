@@ -7,9 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     private static Scene scene;
@@ -39,8 +36,9 @@ public class App extends Application {
         launch();
     }
 
-    public static void Cambiar_Pantalla() throws IOException {
-        scene = new Scene(loadFXML("tareas.fxml"));
+    public static void Cambiar_Pantalla(String archivo_fxml) throws IOException {
+        
+        scene = new Scene(loadFXML((archivo_fxml.equals("perfil")) ? "perfil_usuario.fxml" : "tareas.fxml" ));
         Stage.setScene(scene);
         Stage.setTitle("Pantalla inicial");
         Stage.show();

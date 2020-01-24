@@ -1,0 +1,18 @@
+.fondo{
+    -fx-background-color: #C3EDBC;
+.botones_login {
+    -fx-background-color: #C3EDBC;
+    -fx-border-color: #000000;
+}
+.botones_modificar {
+    -fx-background-color: #1CDB93;
+    -fx-border-color: #000000;
+}
+.texfield_modificar {
+    -fx-background-color:#E5CCFF;
+    -fx-border-color: #000000;
+}
+.texfield_login {
+    -fx-background-color: rgb(159, 228, 255);
+    -fx-border-color: #000000;
+}
