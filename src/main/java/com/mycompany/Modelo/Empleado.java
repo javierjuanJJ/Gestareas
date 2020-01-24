@@ -192,6 +192,7 @@ public class Empleado {
         this.lista_tareas = lista_tareas;
     }
 
+    @Override
     public String toString() {
         return this.nombre + " " + this.primer_apellido + " " + this.segundo_apellido;
     }

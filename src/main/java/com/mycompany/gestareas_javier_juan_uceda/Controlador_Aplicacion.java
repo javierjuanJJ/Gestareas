@@ -281,12 +281,10 @@ public class Controlador_Aplicacion {
         try {
             Tarea tarea = coger_informacion_de_la_tarea(true);
             conexionTareas.insert(tarea);
-            if (!subtarea) {
-                empleado.getLista_tareas().add(tarea_seleccionada);
-            }
+            empleado.getLista_tareas().add(tarea);
             actualizar_vista_usuario();
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
     }
 
@@ -359,13 +357,7 @@ public class Controlador_Aplicacion {
     @FXML
     public void modificar_tarea() {
         try {
-            actualizar_vista_usuario();
-            ArrayList<Tarea> lista_tareas = empleado.getLista_tareas();
-            for (Tarea tarea : lista_tareas) {
-                if (tarea.equals(tarea_seleccionada)) {
-                    tarea.clone(tarea_seleccionada);
-                }
-            }
+            conexionTareas.update(coger_informacion_de_la_tarea(true));
             ComboBox_Empleados_Compartir.getItems().setAll(conexionEmpleados.findAll());
             actualizar_vista_usuario();
         } catch (Exception ex) {

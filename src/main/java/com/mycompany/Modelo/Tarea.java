@@ -102,7 +102,7 @@ public class Tarea implements Comparable<Tarea> {
 
     @Override
     public String toString() {
-        return this.equals(new Tarea()) ? "" : "Tarea " + "descripcion=" + descripcion;
+        return this.equals(new Tarea()) ? "" : descripcion;
     }
 
     public void setId(int i) {
@@ -138,9 +138,10 @@ public class Tarea implements Comparable<Tarea> {
         int anyo_tarea = getFecha_de_alta().getYear();
         int anyo_tarea_finalizacion = getFecha_de_finalizacion().getYear();
 
-        boolean dia_comprobacion = (dia >= dia_tarea) && (dia <= dia_tarea_finalizacion);
-        boolean mes_comprobacion = (mes >= mes_tarea) && (mes <= mes_tarea_finalizacion);
-        boolean anyo_comprobacion = (anyo >= anyo_tarea) && (anyo <= anyo_tarea_finalizacion);
+        //boolean dia_comprobacion = (dia <= dia_tarea_finalizacion);
+        boolean dia_comprobacion = true;
+        boolean mes_comprobacion = (mes <= mes_tarea_finalizacion);
+        boolean anyo_comprobacion = (anyo >= anyo_tarea_finalizacion);
 
         return dia_comprobacion && mes_comprobacion && anyo_comprobacion;
 
