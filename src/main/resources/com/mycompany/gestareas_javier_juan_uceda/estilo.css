@@ -1,5 +1,6 @@
 .fondo{
-    -fx-background-color: #C3EDBC;
+    -fx-background-color: #ceba0c;
+}
 .botones_login {
     -fx-background-color: #C3EDBC;
     -fx-border-color: #000000;
@@ -11,8 +12,49 @@
 .texfield_modificar {
     -fx-background-color:#E5CCFF;
     -fx-border-color: #000000;
+    -fx-font-family: 'ZCOOL QingKe HuangYou', cursive;
+    -fx-color: #1e5f9b;
 }
 .texfield_login {
     -fx-background-color: rgb(159, 228, 255);
     -fx-border-color: #000000;
+}
+.botones_compartir_y_subtarea {
+    -fx-background-color: #a41fb6;
+    -fx-border-color: #000000;
+}
+.botones_opciones_tareas {
+    -fx-background-color: #88455b;
+    -fx-border-color: #000000;
+}
+.vista_arbol {
+    -fx-background-color: #665f1c;
+    -fx-border-color: #62a6ce;
+    -fx-color: #1CDB93;
+}
+.DatePicker_login {
+    -fx-background-color: #cebd24;
+    -fx-border-color: #4a8638;
+    -fx-color: rgb(23, 65, 48);
+}
+.DatePicker_tarea {
+    -fx-background-color: #16294d;
+    -fx-border-color: #96d5fa;
+    -fx-color: #db1c65;
+}
+.Checkbox_tarea {
+    -fx-background-color: #78ceb1;
+    -fx-border-color: #96d5fa;
+    -fx-color: #000000;
+}
+.TextArea_tarea {
+    -fx-background-color: #cae5ff;
+    -fx-border-color: #ff0000;
+    -fx-color: #30a10d;
+}
+.Label_Login {
+    -fx-color: #285588;
+}
+.Label_Tarea {
+    -fx-color: #36a81f;
 }

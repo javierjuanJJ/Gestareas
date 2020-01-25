@@ -15,8 +15,6 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -145,7 +143,7 @@ public class Controlador_Aplicacion {
         if (nuevo_usuario) {
             coger_informacion_de_empleado(false);
         }
-        
+
         if (empleado != null) {
             actualizar_vista_usuario();
         }
@@ -273,19 +271,20 @@ public class Controlador_Aplicacion {
     @FXML
     public void poner_columnas() {
         try {
-            App.Cambiar_Pantalla("tarea");
+            App.Cambiar_Pantalla("perfil");
             nuevo_usuario = true;
         } catch (IOException ex) {
-           ex.printStackTrace();
+
         }
     }
+
     @FXML
     public void poner_perfil() {
         try {
             App.Cambiar_Pantalla("perfil");
             nuevo_usuario = false;
         } catch (IOException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
     }
 

@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.Controlador;
 
-import com.mycompany.Modelo.Empleado;
 import com.mycompany.Modelo.Tarea;
 import com.mycompany.gestareas_javier_juan_uceda.Controlador_Aplicacion;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -60,7 +53,6 @@ public class TareasDAO implements GenericoDAO<Tarea> {
         conexion.getTransaction().begin();
         conexion.persist(t);
         conexion.getTransaction().commit();
-        //System.out.println(t.getId_tarea());
         Controlador_Aplicacion.tarea_seleccionada = new Tarea(t);
         return true;
     }

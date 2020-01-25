@@ -28,9 +28,9 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="label_Nombre_de_Usuario" stylesheets="@estilo.css" text="Nombre de usuario: " GridPane.rowIndex="1" />
+            <Label fx:id="label_Nombre_de_Usuario" styleClass="Label_Login" stylesheets="@estilo.css" text="Nombre de usuario: " GridPane.rowIndex="1" />
             <TextField fx:id="TextField_nombre_de_usuario_login" styleClass="texfield_login" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="label_Contrasenya" stylesheets="@estilo.css" text="Contraseña: " GridPane.rowIndex="2" />
+            <Label fx:id="label_Contrasenya" styleClass="Label_Login" stylesheets="@estilo.css" text="Contraseña: " GridPane.rowIndex="2" />
             <PasswordField fx:id="TextField_contrasenya_login" styleClass="texfield_login" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button fx:id="bt_parte_entrar" mnemonicParsing="false" onAction="#iniciar_sesion" styleClass="botones_login" stylesheets="@estilo.css" text="Entrar" GridPane.columnIndex="2" />
             <Button fx:id="bt_parte_salir" mnemonicParsing="false" onAction="#salir_de_la_sesion" styleClass="botones_login" stylesheets="@estilo.css" text="Salir" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -54,23 +54,23 @@
         </rowConstraints>
          <children>
             <CheckBox fx:id="CheckBox_Realizada_la_tarea" mnemonicParsing="false" stylesheets="@estilo.css" text="Realizada la tarea" GridPane.rowIndex="3" />
-            <Label fx:id="label_Compartir_a" stylesheets="@estilo.css" text="Compartir a: " GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox fx:id="ComboBox_Empleados_Compartir" prefWidth="150.0" stylesheets="@estilo.css" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="bt_compartir" mnemonicParsing="false" onAction="#compartir_tarea" stylesheets="@estilo.css" text="Compartir" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <DatePicker fx:id="fecha_de_nacimiento_tarea" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <DatePicker fx:id="fecha_de_finalizacion_tarea" stylesheets="@estilo.css" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <TextArea fx:id="TextArea_Descripcion" prefHeight="48.0" prefWidth="142.0" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Button fx:id="bt_insertar_tarea" mnemonicParsing="false" onAction="#insertar_tarea" stylesheets="@estilo.css" text="Insertar tarea" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Button fx:id="bt_modificar_tarea" mnemonicParsing="false" onAction="#modificar_tarea" stylesheets="@estilo.css" text="Modificar tarea" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-            <Button fx:id="bt_eliminar_tarea" mnemonicParsing="false" onAction="#eliminar_tarea" prefHeight="26.0" prefWidth="117.0" stylesheets="@estilo.css" text="Eliminar tarea" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <ComboBox fx:id="ComboBox_Empleados_subtareas" onMouseClicked="#Llenar_tareas_y_subtareas" prefWidth="150.0" stylesheets="@estilo.css" GridPane.columnIndex="2" />
-            <Label fx:id="label_anyadir_subtarea_a" stylesheets="@estilo.css" text="Añadir subtarea a: " GridPane.columnIndex="1" />
-            <Button fx:id="bt_anyadir_una_subtarea" mnemonicParsing="false" onAction="#Anyadir_una_subtarea" stylesheets="@estilo.css" text="Añadir una subtarea" GridPane.columnIndex="3" />
-            <Label fx:id="label_crear_fecha_inicio" stylesheets="@estilo.css" text="Fecha de inicio de la tarea" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="label_crear_fecha_finalizacion" stylesheets="@estilo.css" text="Fecha de finalizacion de la tarea" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label fx:id="label_crear_descripcion" stylesheets="@estilo.css" text="Descripcion de la tarea: " GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label fx:id="label_Compartir_a" styleClass="Label_Tarea" stylesheets="@estilo.css" text="Compartir a: " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="ComboBox_Empleados_Compartir" prefWidth="150.0" styleClass="Checkbox_tarea" stylesheets="@estilo.css" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="bt_compartir" mnemonicParsing="false" onAction="#compartir_tarea" styleClass="botones_compartir_y_subtarea" stylesheets="@estilo.css" text="Compartir" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <DatePicker fx:id="fecha_de_nacimiento_tarea" styleClass="DatePicker_tarea" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <DatePicker fx:id="fecha_de_finalizacion_tarea" styleClass="DatePicker_tarea" stylesheets="@estilo.css" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextArea fx:id="TextArea_Descripcion" prefHeight="48.0" prefWidth="142.0" styleClass="TextArea_tarea" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button fx:id="bt_insertar_tarea" mnemonicParsing="false" onAction="#insertar_tarea" styleClass="botones_opciones_tareas" stylesheets="@estilo.css" text="Insertar tarea" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Button fx:id="bt_modificar_tarea" mnemonicParsing="false" onAction="#modificar_tarea" styleClass="botones_opciones_tareas" stylesheets="@estilo.css" text="Modificar tarea" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <Button fx:id="bt_eliminar_tarea" mnemonicParsing="false" onAction="#eliminar_tarea" prefHeight="26.0" prefWidth="117.0" styleClass="botones_opciones_tareas" stylesheets="@estilo.css" text="Eliminar tarea" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <ComboBox fx:id="ComboBox_Empleados_subtareas" onMouseClicked="#Llenar_tareas_y_subtareas" prefWidth="150.0" styleClass="Checkbox_tarea" stylesheets="@estilo.css" GridPane.columnIndex="2" />
+            <Label fx:id="label_anyadir_subtarea_a" styleClass="Label_Tarea" stylesheets="@estilo.css" text="Añadir subtarea a: " GridPane.columnIndex="1" />
+            <Button fx:id="bt_anyadir_una_subtarea" mnemonicParsing="false" onAction="#Anyadir_una_subtarea" styleClass="botones_compartir_y_subtarea" stylesheets="@estilo.css" text="Añadir una subtarea" GridPane.columnIndex="3" />
+            <Label fx:id="label_crear_fecha_inicio" styleClass="Label_Tarea" stylesheets="@estilo.css" text="Fecha de inicio de la tarea" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="label_crear_fecha_finalizacion" styleClass="Label_Tarea" stylesheets="@estilo.css" text="Fecha de finalizacion de la tarea" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="label_crear_descripcion" styleClass="Label_Tarea" stylesheets="@estilo.css" text="Descripcion de la tarea: " GridPane.columnIndex="3" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <TreeView fx:id="treeview_vista" layoutX="382.0" layoutY="14.0" onMouseClicked="#Poner_tarea_tree" prefHeight="227.0" prefWidth="655.0" stylesheets="@estilo.css" />
+      <TreeView fx:id="treeview_vista" layoutX="382.0" layoutY="14.0" onMouseClicked="#Poner_tarea_tree" prefHeight="227.0" prefWidth="655.0" styleClass="vista_arbol" stylesheets="@estilo.css" />
    </children>
 </AnchorPane>

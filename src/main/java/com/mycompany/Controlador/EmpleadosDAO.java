@@ -7,6 +7,7 @@ package com.mycompany.Controlador;
 
 import com.mycompany.Modelo.Empleado;
 import com.mycompany.gestareas_javier_juan_uceda.Controlador_Aplicacion;
+import com.mycompany.gestareas_javier_juan_uceda.Controlador_perfil_Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -60,11 +61,12 @@ public class EmpleadosDAO implements GenericoDAO<Empleado> {
     
     @Override
     public boolean update(Empleado t) throws Exception {
-        Empleado employee = this.findByPK(t.getId());
+        Empleado employee = findByPK(t.getId());
         conexion.getTransaction().begin();
         employee.clone(t);
         conexion.getTransaction().commit();
-        Controlador_Aplicacion.empleado = new Empleado(employee);
+        Controlador_Aplicacion.empleado = new Empleado(t);
+        Controlador_perfil_Usuario.empleado = new Empleado(t);
         return true;
     }
     

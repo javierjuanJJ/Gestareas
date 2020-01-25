@@ -37,8 +37,8 @@ public class App extends Application {
     }
 
     public static void Cambiar_Pantalla(String archivo_fxml) throws IOException {
-        
-        scene = new Scene(loadFXML((archivo_fxml.equals("perfil")) ? "perfil_usuario.fxml" : "tareas.fxml" ));
+
+        scene = new Scene(loadFXML((archivo_fxml.equals("perfil")) ? "perfil_usuario.fxml" : "tareas.fxml"));
         Stage.setScene(scene);
         Stage.setTitle("Pantalla inicial");
         Stage.show();

@@ -33,23 +33,23 @@
             <TextField fx:id="TextField_nombre_de_usuario" styleClass="texfield_modificar" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="TextField_primer_apellido" styleClass="texfield_modificar" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="TextField_segundo_apellido" styleClass="texfield_modificar" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="TextField_direccion" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="TextField_telefono" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <TextField fx:id="TextField_localidad" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Label fx:id="label_Columna_Datos_Nombre_de_Usuario" stylesheets="@estilo.css" text="Nombre de usuario: " GridPane.rowIndex="1" />
-            <Label fx:id="label_Columna_Datos_Primer_Apellido" stylesheets="@estilo.css" text="Primer apellido: " GridPane.rowIndex="2" />
-            <Label fx:id="label_Columna_Datos_Segundo_Apellido" stylesheets="@estilo.css" text="Segundo Apellido: " GridPane.rowIndex="3" />
-            <Label fx:id="label_Columna_Datos_Direccion" stylesheets="@estilo.css" text="Direccion: " GridPane.rowIndex="4" />
-            <Label fx:id="label_Columna_Datos_Telefono" stylesheets="@estilo.css" text="Telefono" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Label fx:id="label_Columna_Datos_Localidad" stylesheets="@estilo.css" text="Localidad: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label fx:id="label_Columna_Fecha_de_nacimiento" stylesheets="@estilo.css" text="Fecha de nacimiento: " GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="TextField_direccion" styleClass="texfield_modificar" stylesheets="@estilo.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="TextField_telefono" styleClass="texfield_modificar" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <TextField fx:id="TextField_localidad" styleClass="texfield_modificar" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="label_Columna_Datos_Nombre_de_Usuario" styleClass="Label_Login" stylesheets="@estilo.css" text="Nombre de usuario: " GridPane.rowIndex="1" />
+            <Label fx:id="label_Columna_Datos_Primer_Apellido" styleClass="Label_Login" stylesheets="@estilo.css" text="Primer apellido: " GridPane.rowIndex="2" />
+            <Label fx:id="label_Columna_Datos_Segundo_Apellido" styleClass="Label_Login" stylesheets="@estilo.css" text="Segundo Apellido: " GridPane.rowIndex="3" />
+            <Label fx:id="label_Columna_Datos_Direccion" styleClass="Label_Login" stylesheets="@estilo.css" text="Direccion: " GridPane.rowIndex="4" />
+            <Label fx:id="label_Columna_Datos_Telefono" styleClass="Label_Login" stylesheets="@estilo.css" text="Telefono" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label fx:id="label_Columna_Datos_Localidad" styleClass="Label_Login" stylesheets="@estilo.css" text="Localidad: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="label_Columna_Fecha_de_nacimiento" styleClass="Label_Login" stylesheets="@estilo.css" text="Fecha de nacimiento: " GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label stylesheets="@estilo.css" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <DatePicker fx:id="fecha_de_nacimiento_login" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Label fx:id="label_Contrasenya1" stylesheets="@estilo.css" text="Contraseña: " GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <PasswordField fx:id="TextField_contrasenya_login1" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <DatePicker fx:id="fecha_de_nacimiento_login" styleClass="DatePicker_login" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label fx:id="label_Contrasenya1" styleClass="Label_Login" stylesheets="@estilo.css" text="Contraseña: " GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <PasswordField fx:id="TextField_contrasenya_login1" styleClass="texfield_modificar" stylesheets="@estilo.css" GridPane.columnIndex="3" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <Label fx:id="label_informacion_login" layoutX="467.0" layoutY="6.0" prefHeight="16.0" prefWidth="376.0" stylesheets="@estilo.css" text="Label" />
-      <Button layoutX="29.0" layoutY="240.0" mnemonicParsing="false" onAction="#salir_de_la_sesion" text="Volver a la pantalla de tareas" />
+      <Button layoutX="29.0" layoutY="240.0" mnemonicParsing="false" onAction="#salir_de_la_sesion" styleClass="botones_modificar" stylesheets="@estilo.css" text="Volver a la pantalla de tareas" />
    </children>
 </AnchorPane>

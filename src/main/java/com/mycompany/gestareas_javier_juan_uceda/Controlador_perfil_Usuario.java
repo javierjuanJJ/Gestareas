@@ -9,17 +9,12 @@ import com.mycompany.Controlador.EmpleadosDAO;
 import com.mycompany.Controlador.TareasDAO;
 import com.mycompany.Modelo.Empleado;
 import com.mycompany.Modelo.Tarea;
-import static com.mycompany.gestareas_javier_juan_uceda.Controlador_Aplicacion.empleado;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -28,17 +23,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 
 /**
  *
  * @author batoi
  */
 public class Controlador_perfil_Usuario {
-    
+
     public static Empleado empleado;
     public static Tarea tarea_seleccionada;
     private ArrayList<Tarea> tareas_lista;
@@ -136,7 +129,7 @@ public class Controlador_perfil_Usuario {
     private TextArea TextArea_Descripcion;
     @FXML
     private AnchorPane escritorio;
-    
+
     @FXML
     public void initialize() {
         conexionEmpleados = new EmpleadosDAO();
@@ -146,7 +139,7 @@ public class Controlador_perfil_Usuario {
         coger_informacion_de_empleado(false);
 
     }
-    
+
     private Empleado coger_informacion_de_empleado(boolean coger) {
         Empleado Empleado_creado = null;
         if (coger) {
@@ -157,7 +150,7 @@ public class Controlador_perfil_Usuario {
             Empleado_creado.setLocalidad(TextField_localidad.getText());
             Empleado_creado.setFecha_nacimiento(Date.from(Instant.from(fecha_de_nacimiento_login.getValue().atStartOfDay(ZoneId.systemDefault()))));
             Empleado_creado.setNombre(TextField_nombre_de_usuario.getText());
-            Empleado_creado.setContrasenya(TextField_contrasenya_login1.getText().isEmpty() ? "" : TextField_contrasenya_login1.getText());
+            Empleado_creado.setContrasenya(TextField_contrasenya_login1.getText() == null ? empleado.getContrasenya() : TextField_contrasenya_login1.getText());
             Empleado_creado.setPrimer_apellido(TextField_primer_apellido.getText());
             Empleado_creado.setSegundo_apellido(TextField_segundo_apellido.getText());
             Empleado_creado.setLista_tareas(empleado.getLista_tareas());
@@ -181,7 +174,7 @@ public class Controlador_perfil_Usuario {
         }
         return Empleado_creado;
     }
-    
+
     @FXML
     public void insertar_empleado() {
         try {
@@ -196,10 +189,10 @@ public class Controlador_perfil_Usuario {
         try {
             conexionEmpleados.update(coger_informacion_de_empleado(true));
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
     }
-    
+
     @FXML
     public void eliminar_empleado() {
         try {
@@ -209,7 +202,7 @@ public class Controlador_perfil_Usuario {
 
         }
     }
-    
+
     @FXML
     public void salir_de_la_sesion() {
         try {
