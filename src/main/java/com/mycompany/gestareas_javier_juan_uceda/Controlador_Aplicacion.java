@@ -146,6 +146,8 @@ public class Controlador_Aplicacion {
 
         if (empleado != null) {
             actualizar_vista_usuario();
+        } else {
+            ocultar_desocultar("login");
         }
 
     }
@@ -214,20 +216,29 @@ public class Controlador_Aplicacion {
 
     @FXML
     public void Poner_tarea_tree() {
-        tarea_seleccionada = new Tarea(tareas_lista.get(treeview_vista.getSelectionModel().getSelectedIndex()));
-        coger_informacion_de_la_tarea(false);
+
+        try {
+            tarea_seleccionada = new Tarea(tareas_lista.get(treeview_vista.getSelectionModel().getSelectedIndex()));
+            coger_informacion_de_la_tarea(false);
+        } catch (Exception ex) {
+
+        }
     }
 
     public void Llenar_tree() {
-        treeview_vista.setRoot(crear_vista_arbol(empleado.getLista_tareas()));
+        try {
+            treeview_vista.setRoot(crear_vista_arbol(empleado.getLista_tareas()));
+        } catch (Exception ex) {
+
+        }
     }
 
     @FXML
     public void Anyadir_una_subtarea() {
-        subtarea = true;
-        insertar_tarea();
-        Tarea tarea = new Tarea(ComboBox_Empleados_subtareas.getSelectionModel().getSelectedItem());
         try {
+            subtarea = true;
+            insertar_tarea();
+            Tarea tarea = new Tarea(ComboBox_Empleados_subtareas.getSelectionModel().getSelectedItem());
             tarea.getLista_subtareas().add(tarea_seleccionada);
             actualizar_vista_usuario();
         } catch (Exception ex) {
@@ -237,21 +248,26 @@ public class Controlador_Aplicacion {
 
     private TreeItem<Tarea> crear_vista_arbol(ArrayList<Tarea> lista_tareas) {
         TreeItem<Tarea> rootItem = new TreeItem();
-        rootItem.setExpanded(true);
-        for (Tarea tarea : lista_tareas) {
-            if ((!tarea.equals(new Tarea())) && (tarea.esta_entre(new Date()))) {
-                TreeItem<Tarea> item = new TreeItem();
-                item.setValue(tarea);
-                rootItem.getChildren().add(item);
-                try {
-                    if (tarea.getLista_subtareas().size() >= 0) {
-                        rootItem.getChildren().add(crear_vista_arbol(tarea.getLista_subtareas()));
-                    }
-                } catch (StackOverflowError e) {
+        try {
+            rootItem.setExpanded(true);
+            for (Tarea tarea : lista_tareas) {
+                if ((!tarea.equals(new Tarea())) && (tarea.esta_entre(new Date()))) {
+                    TreeItem<Tarea> item = new TreeItem();
+                    item.setValue(tarea);
+                    rootItem.getChildren().add(item);
+                    try {
+                        if (tarea.getLista_subtareas().size() >= 0) {
+                            rootItem.getChildren().add(crear_vista_arbol(tarea.getLista_subtareas()));
+                        }
+                    } catch (StackOverflowError e) {
 
+                    }
                 }
             }
+        } catch (Exception e) {
+
         }
+
         return rootItem;
     }
 
@@ -264,7 +280,7 @@ public class Controlador_Aplicacion {
             empleado.getLista_tareas().add(tarea);
             actualizar_vista_usuario();
         } catch (Exception ex) {
-            ex.printStackTrace();
+
         }
     }
 
@@ -284,68 +300,80 @@ public class Controlador_Aplicacion {
             App.Cambiar_Pantalla("perfil");
             nuevo_usuario = false;
         } catch (IOException ex) {
-            ex.printStackTrace();
+
         }
     }
 
     private Empleado coger_informacion_de_empleado(boolean coger) {
         Empleado Empleado_creado = null;
-        if (coger) {
-            empleado = empleado == null ? new Empleado() : empleado;
-            Empleado_creado = new Empleado();
-            Empleado_creado.setIdEmpleado(empleado.getId());
-            Empleado_creado.setDireccion(TextField_direccion.getText());
-            Empleado_creado.setLocalidad(TextField_localidad.getText());
-            Empleado_creado.setFecha_nacimiento(Date.from(Instant.from(fecha_de_nacimiento_login.getValue().atStartOfDay(ZoneId.systemDefault()))));
-            Empleado_creado.setNombre(TextField_nombre_de_usuario.getText());
-            Empleado_creado.setContrasenya(TextField_contrasenya_login1.getText().isEmpty() ? "" : TextField_contrasenya_login1.getText());
-            Empleado_creado.setPrimer_apellido(TextField_primer_apellido.getText());
-            Empleado_creado.setSegundo_apellido(TextField_segundo_apellido.getText());
-            Empleado_creado.setLista_tareas(empleado.getLista_tareas());
-            int telefono = 0;
-            try {
-                telefono = Integer.parseInt(TextField_telefono.getText());
-            } catch (NumberFormatException e) {
-                telefono = 0;
+
+        try {
+            if (coger) {
+                empleado = empleado == null ? new Empleado() : empleado;
+                Empleado_creado = new Empleado();
+                Empleado_creado.setIdEmpleado(empleado.getId());
+                Empleado_creado.setDireccion(TextField_direccion.getText());
+                Empleado_creado.setLocalidad(TextField_localidad.getText());
+                Empleado_creado.setFecha_nacimiento(Date.from(Instant.from(fecha_de_nacimiento_login.getValue().atStartOfDay(ZoneId.systemDefault()))));
+                Empleado_creado.setNombre(TextField_nombre_de_usuario.getText());
+                Empleado_creado.setContrasenya(TextField_contrasenya_login1.getText().isEmpty() ? "" : TextField_contrasenya_login1.getText());
+                Empleado_creado.setPrimer_apellido(TextField_primer_apellido.getText());
+                Empleado_creado.setSegundo_apellido(TextField_segundo_apellido.getText());
+                Empleado_creado.setLista_tareas(empleado.getLista_tareas());
+                int telefono = 0;
+                try {
+                    telefono = Integer.parseInt(TextField_telefono.getText());
+                } catch (NumberFormatException e) {
+                    telefono = 0;
+                }
+                Empleado_creado.setTelefono(telefono);
+            } else {
+                Empleado_creado = new Empleado(empleado);
+                TextField_direccion.setText(empleado.getDireccion());
+                TextField_contrasenya_login.setText(empleado.getContrasenya());
+                TextField_localidad.setText(empleado.getLocalidad());
+                TextField_nombre_de_usuario.setText(empleado.getNombre());
+                TextField_primer_apellido.setText(empleado.getPrimer_apellido());
+                TextField_segundo_apellido.setText(empleado.getSegundo_apellido());
+                TextField_telefono.setText(String.valueOf(empleado.getTelefono()));
+                fecha_de_nacimiento_login.setValue(empleado.getFecha_nacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                TextField_contrasenya_login1.setText(empleado.getContrasenya());
             }
-            Empleado_creado.setTelefono(telefono);
-        } else {
-            Empleado_creado = new Empleado(empleado);
-            TextField_direccion.setText(empleado.getDireccion());
-            TextField_contrasenya_login.setText(empleado.getContrasenya());
-            TextField_localidad.setText(empleado.getLocalidad());
-            TextField_nombre_de_usuario.setText(empleado.getNombre());
-            TextField_primer_apellido.setText(empleado.getPrimer_apellido());
-            TextField_segundo_apellido.setText(empleado.getSegundo_apellido());
-            TextField_telefono.setText(String.valueOf(empleado.getTelefono()));
-            fecha_de_nacimiento_login.setValue(empleado.getFecha_nacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            TextField_contrasenya_login1.setText(empleado.getContrasenya());
+        } catch (Exception e) {
+
         }
+
         return Empleado_creado;
     }
 
     private Tarea coger_informacion_de_la_tarea(boolean coger) {
-        Tarea Tarea_creada;
-        if (coger) {
-            Tarea_creada = new Tarea();
-            if (tarea_seleccionada != null) {
-                Tarea_creada.setId(tarea_seleccionada.getId_tarea());
-                Tarea_creada.setLista_subtareas(tarea_seleccionada.getLista_subtareas());
-            }
-            Tarea_creada.setDescripcion(TextArea_Descripcion.getText());
-            Tarea_creada.setEsta_realizada(CheckBox_Realizada_la_tarea.isSelected());
-            Tarea_creada.setFecha_de_alta(Date.from(Instant.from(fecha_de_nacimiento_tarea.getValue().atStartOfDay(ZoneId.systemDefault()))));
-            Tarea_creada.setFecha_de_finalizacion(Date.from(Instant.from(fecha_de_finalizacion_tarea.getValue().atStartOfDay(ZoneId.systemDefault()))));
-        } else {
-            Tarea_creada = new Tarea(tarea_seleccionada);
+        Tarea Tarea_creada = null;
 
-            if (!Tarea_creada.equals(new Tarea())) {
-                fecha_de_nacimiento_tarea.setValue(tarea_seleccionada.getFecha_de_alta().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                fecha_de_finalizacion_tarea.setValue(tarea_seleccionada.getFecha_de_finalizacion().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                TextArea_Descripcion.setText(tarea_seleccionada.getDescripcion());
-                CheckBox_Realizada_la_tarea.setSelected(tarea_seleccionada.isEsta_realizada());
+        try {
+            if (coger) {
+                Tarea_creada = new Tarea();
+                if (tarea_seleccionada != null) {
+                    Tarea_creada.setId(tarea_seleccionada.getId_tarea());
+                    Tarea_creada.setLista_subtareas(tarea_seleccionada.getLista_subtareas());
+                }
+                Tarea_creada.setDescripcion(TextArea_Descripcion.getText());
+                Tarea_creada.setEsta_realizada(CheckBox_Realizada_la_tarea.isSelected());
+                Tarea_creada.setFecha_de_alta(Date.from(Instant.from(fecha_de_nacimiento_tarea.getValue().atStartOfDay(ZoneId.systemDefault()))));
+                Tarea_creada.setFecha_de_finalizacion(Date.from(Instant.from(fecha_de_finalizacion_tarea.getValue().atStartOfDay(ZoneId.systemDefault()))));
+            } else {
+                Tarea_creada = new Tarea(tarea_seleccionada);
+
+                if (!Tarea_creada.equals(new Tarea())) {
+                    fecha_de_nacimiento_tarea.setValue(tarea_seleccionada.getFecha_de_alta().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                    fecha_de_finalizacion_tarea.setValue(tarea_seleccionada.getFecha_de_finalizacion().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                    TextArea_Descripcion.setText(tarea_seleccionada.getDescripcion());
+                    CheckBox_Realizada_la_tarea.setSelected(tarea_seleccionada.isEsta_realizada());
+                }
             }
+        } catch (Exception ex) {
+
         }
+
         return Tarea_creada;
     }
 
@@ -386,84 +414,97 @@ public class Controlador_Aplicacion {
     }
 
     public void poner_escritorio(boolean escritorio) {
-        for (Node elemento : this.escritorio.getChildren()) {
-            elemento.setVisible(escritorio);
+        try {
+            for (Node elemento : this.escritorio.getChildren()) {
+                elemento.setVisible(escritorio);
 
-            if (elemento.getClass().getCanonicalName().contains("GridPane")) {
-                GridPane gridpane = (GridPane) elemento;
-                gridpane.setVisible(true);
-                for (Node childrens : gridpane.getChildren()) {
-                    childrens.setVisible(escritorio);
+                if (elemento.getClass().getCanonicalName().contains("GridPane")) {
+                    GridPane gridpane = (GridPane) elemento;
+                    gridpane.setVisible(true);
+                    for (Node childrens : gridpane.getChildren()) {
+                        childrens.setVisible(escritorio);
+                    }
+
                 }
-
             }
+        } catch (Exception ex) {
+
         }
     }
 
     public void ocultar_desocultar(String accion) {
 
-        poner_escritorio(false);
-        switch (accion) {
-            case "informacion_usuario":
-                TextField_nombre_de_usuario.setVisible(true);
-                bt_insertar_empleado.setVisible(true);
-                bt_modificar_empleado.setVisible(true);
-                bt_eliminar_empleado.setVisible(true);
-                label_Columna_Datos_Nombre_de_Usuario.setVisible(true);
-                label_Columna_Datos_Primer_Apellido.setVisible(true);
-                label_Columna_Datos_Segundo_Apellido.setVisible(true);
-                label_Columna_Datos_Direccion.setVisible(true);
-                label_Columna_Datos_Telefono.setVisible(true);
-                label_Columna_Datos_Localidad.setVisible(true);
-                label_Columna_Fecha_de_nacimiento.setVisible(true);
-                TextField_primer_apellido.setVisible(true);
-                TextField_segundo_apellido.setVisible(true);
-                TextField_direccion.setVisible(true);
-                TextField_telefono.setVisible(true);
-                TextField_localidad.setVisible(true);
-                label_Nombre_de_Usuario.setVisible(true);
-                label_Contrasenya.setVisible(true);
-                TextField_nombre_de_usuario_login.setVisible(true);
-                TextField_contrasenya_login.setVisible(true);
-                fecha_de_nacimiento_login.setVisible(true);
-                bt_parte_entrar.setVisible(true);
-                bt_parte_salir.setVisible(true);
-                bt_parte_agregar.setVisible(true);
-                TextField_contrasenya_login1.setVisible(true);
-                label_Contrasenya1.setVisible(true);
-                break;
+        try {
+            poner_escritorio(false);
+            switch (accion) {
+                case "informacion_usuario":
+                    TextField_nombre_de_usuario.setVisible(true);
+                    bt_insertar_empleado.setVisible(true);
+                    bt_modificar_empleado.setVisible(true);
+                    bt_eliminar_empleado.setVisible(true);
+                    label_Columna_Datos_Nombre_de_Usuario.setVisible(true);
+                    label_Columna_Datos_Primer_Apellido.setVisible(true);
+                    label_Columna_Datos_Segundo_Apellido.setVisible(true);
+                    label_Columna_Datos_Direccion.setVisible(true);
+                    label_Columna_Datos_Telefono.setVisible(true);
+                    label_Columna_Datos_Localidad.setVisible(true);
+                    label_Columna_Fecha_de_nacimiento.setVisible(true);
+                    TextField_primer_apellido.setVisible(true);
+                    TextField_segundo_apellido.setVisible(true);
+                    TextField_direccion.setVisible(true);
+                    TextField_telefono.setVisible(true);
+                    TextField_localidad.setVisible(true);
+                    label_Nombre_de_Usuario.setVisible(true);
+                    label_Contrasenya.setVisible(true);
+                    TextField_nombre_de_usuario_login.setVisible(true);
+                    TextField_contrasenya_login.setVisible(true);
+                    fecha_de_nacimiento_login.setVisible(true);
+                    bt_parte_entrar.setVisible(true);
+                    bt_parte_salir.setVisible(true);
+                    bt_parte_agregar.setVisible(true);
+                    TextField_contrasenya_login1.setVisible(true);
+                    label_Contrasenya1.setVisible(true);
+                    break;
 
-            case "login":
-                label_Nombre_de_Usuario.setVisible(true);
-                label_Contrasenya.setVisible(true);
-                TextField_nombre_de_usuario_login.setVisible(true);
-                TextField_contrasenya_login.setVisible(true);
-                bt_parte_entrar.setVisible(true);
-                bt_parte_salir.setVisible(true);
-                bt_parte_agregar.setVisible(true);
-                break;
-            case "todo":
-                poner_escritorio(true);
-                break;
-            default:
-                break;
+                case "login":
+                    label_Nombre_de_Usuario.setVisible(true);
+                    label_Contrasenya.setVisible(true);
+                    TextField_nombre_de_usuario_login.setVisible(true);
+                    TextField_contrasenya_login.setVisible(true);
+                    bt_parte_entrar.setVisible(true);
+                    bt_parte_salir.setVisible(true);
+                    bt_parte_agregar.setVisible(true);
+                    break;
+                case "todo":
+                    poner_escritorio(true);
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception ex) {
+
         }
+
     }
 
     private ArrayList<Tarea> Llenar_lista_tareas(ArrayList<Tarea> lista_tareas) {
         ArrayList<Tarea> rootItem = new ArrayList();
-        for (Tarea tarea : lista_tareas) {
-            if ((!tarea.equals(new Tarea())) && (tarea.esta_entre(new Date()))) {
-                rootItem.add(new Tarea());
-                rootItem.add(tarea);
-                if (tarea.getLista_subtareas().size() >= 0) {
-                    try {
-                        rootItem.addAll(Llenar_lista_tareas(tarea.getLista_subtareas()));
-                    } catch (StackOverflowError e) {
+        try {
+            for (Tarea tarea : lista_tareas) {
+                if ((!tarea.equals(new Tarea())) && (tarea.esta_entre(new Date()))) {
+                    rootItem.add(new Tarea());
+                    rootItem.add(tarea);
+                    if (tarea.getLista_subtareas().size() >= 0) {
+                        try {
+                            rootItem.addAll(Llenar_lista_tareas(tarea.getLista_subtareas()));
+                        } catch (StackOverflowError e) {
 
+                        }
                     }
                 }
             }
+        } catch (Exception ex) {
+
         }
         return rootItem;
     }

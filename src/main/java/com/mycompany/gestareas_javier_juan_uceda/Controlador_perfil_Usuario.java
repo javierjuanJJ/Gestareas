@@ -132,45 +132,54 @@ public class Controlador_perfil_Usuario {
 
     @FXML
     public void initialize() {
-        conexionEmpleados = new EmpleadosDAO();
-        conexionTareas = new TareasDAO();
-        tareas_lista = new ArrayList();
-        empleado = Controlador_Aplicacion.empleado != null ? Controlador_Aplicacion.empleado : new Empleado();
-        coger_informacion_de_empleado(false);
+        try {
+            conexionEmpleados = new EmpleadosDAO();
+            conexionTareas = new TareasDAO();
+            tareas_lista = new ArrayList();
+            empleado = Controlador_Aplicacion.empleado != null ? Controlador_Aplicacion.empleado : new Empleado();
+            coger_informacion_de_empleado(false);
 
+        } catch (Exception ex) {
+
+        }
     }
 
     private Empleado coger_informacion_de_empleado(boolean coger) {
         Empleado Empleado_creado = null;
-        if (coger) {
-            empleado = empleado == null ? new Empleado() : empleado;
-            Empleado_creado = new Empleado();
-            Empleado_creado.setIdEmpleado(empleado.getId());
-            Empleado_creado.setDireccion(TextField_direccion.getText());
-            Empleado_creado.setLocalidad(TextField_localidad.getText());
-            Empleado_creado.setFecha_nacimiento(Date.from(Instant.from(fecha_de_nacimiento_login.getValue().atStartOfDay(ZoneId.systemDefault()))));
-            Empleado_creado.setNombre(TextField_nombre_de_usuario.getText());
-            Empleado_creado.setContrasenya(TextField_contrasenya_login1.getText() == null ? empleado.getContrasenya() : TextField_contrasenya_login1.getText());
-            Empleado_creado.setPrimer_apellido(TextField_primer_apellido.getText());
-            Empleado_creado.setSegundo_apellido(TextField_segundo_apellido.getText());
-            Empleado_creado.setLista_tareas(empleado.getLista_tareas());
-            int telefono = 0;
-            try {
-                telefono = Integer.parseInt(TextField_telefono.getText());
-            } catch (NumberFormatException e) {
-                telefono = 0;
+
+        try {
+            if (coger) {
+                empleado = empleado == null ? new Empleado() : empleado;
+                Empleado_creado = new Empleado();
+                Empleado_creado.setIdEmpleado(empleado.getId());
+                Empleado_creado.setDireccion(TextField_direccion.getText());
+                Empleado_creado.setLocalidad(TextField_localidad.getText());
+                Empleado_creado.setFecha_nacimiento(Date.from(Instant.from(fecha_de_nacimiento_login.getValue().atStartOfDay(ZoneId.systemDefault()))));
+                Empleado_creado.setNombre(TextField_nombre_de_usuario.getText());
+                Empleado_creado.setContrasenya(TextField_contrasenya_login1.getText() == null ? empleado.getContrasenya() : TextField_contrasenya_login1.getText());
+                Empleado_creado.setPrimer_apellido(TextField_primer_apellido.getText());
+                Empleado_creado.setSegundo_apellido(TextField_segundo_apellido.getText());
+                Empleado_creado.setLista_tareas(empleado.getLista_tareas());
+                int telefono = 0;
+                try {
+                    telefono = Integer.parseInt(TextField_telefono.getText());
+                } catch (NumberFormatException e) {
+                    telefono = 0;
+                }
+                Empleado_creado.setTelefono(telefono);
+            } else {
+                Empleado_creado = new Empleado(empleado);
+                TextField_direccion.setText(empleado.getDireccion());
+                TextField_localidad.setText(empleado.getLocalidad());
+                TextField_nombre_de_usuario.setText(empleado.getNombre());
+                TextField_primer_apellido.setText(empleado.getPrimer_apellido());
+                TextField_segundo_apellido.setText(empleado.getSegundo_apellido());
+                TextField_telefono.setText(String.valueOf(empleado.getTelefono()));
+                fecha_de_nacimiento_login.setValue(empleado.getFecha_nacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                TextField_contrasenya_login1.setText(empleado.getContrasenya());
             }
-            Empleado_creado.setTelefono(telefono);
-        } else {
-            Empleado_creado = new Empleado(empleado);
-            TextField_direccion.setText(empleado.getDireccion());
-            TextField_localidad.setText(empleado.getLocalidad());
-            TextField_nombre_de_usuario.setText(empleado.getNombre());
-            TextField_primer_apellido.setText(empleado.getPrimer_apellido());
-            TextField_segundo_apellido.setText(empleado.getSegundo_apellido());
-            TextField_telefono.setText(String.valueOf(empleado.getTelefono()));
-            fecha_de_nacimiento_login.setValue(empleado.getFecha_nacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            TextField_contrasenya_login1.setText(empleado.getContrasenya());
+        } catch (Exception ex) {
+
         }
         return Empleado_creado;
     }
@@ -189,7 +198,7 @@ public class Controlador_perfil_Usuario {
         try {
             conexionEmpleados.update(coger_informacion_de_empleado(true));
         } catch (Exception ex) {
-            ex.printStackTrace();
+
         }
     }
 
