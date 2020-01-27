@@ -15,6 +15,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -136,17 +138,22 @@ public class Controlador_Aplicacion {
 
     @FXML
     public void initialize() {
-        conexionEmpleados = new EmpleadosDAO();
-        conexionTareas = new TareasDAO();
-        tareas_lista = new ArrayList();
-        if (nuevo_usuario) {
-            coger_o_poner_informacion_de_empleado(false);
-        }
-
-        if (empleado != null) {
-            actualizar_vista_usuario();
-        } else {
-            ocultar_desocultar("login");
+        try {
+            conexionEmpleados = new EmpleadosDAO();
+            conexionTareas = new TareasDAO();
+            tareas_lista = new ArrayList();
+            
+            if (nuevo_usuario) {
+                coger_o_poner_informacion_de_empleado(false);
+            }
+            
+            if (empleado != null) {
+                actualizar_vista_usuario();
+            } else {
+                ocultar_desocultar("login");
+            }
+        } catch (Exception ex) {
+            
         }
 
     }

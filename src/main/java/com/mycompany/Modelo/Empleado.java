@@ -31,25 +31,19 @@ public class Empleado {
     private String segundo_apellido;
     private String direccion;
     private int telefono;
-    private String localidad;
-    private String codigo_postal;
+    private String localidad;  
     private String contrasenya;
-    private boolean esta_muerto;
     private Date fecha_nacimiento;
-    private Date fecha_fallecimiento;
     private ArrayList<Tarea> lista_tareas;
 
-    public Empleado(String nombre, String primer_apellido, String segundo_apellido, String direccion, int telefono, String localidad, String codigo_postal, boolean esta_muerto, Date fecha_nacimiento, Date fecha_fallecimiento, String contrasenya, ArrayList<Tarea> lista_tareas) {
+    public Empleado(String nombre, String primer_apellido, String segundo_apellido, String direccion, int telefono, String localidad, boolean esta_muerto, Date fecha_nacimiento, String contrasenya, ArrayList<Tarea> lista_tareas) {
         this.nombre = nombre;
         this.primer_apellido = primer_apellido;
         this.segundo_apellido = segundo_apellido;
         this.direccion = direccion;
         this.telefono = telefono;
         this.localidad = localidad;
-        this.codigo_postal = codigo_postal;
-        this.esta_muerto = esta_muerto;
         this.fecha_nacimiento = fecha_nacimiento;
-        this.fecha_fallecimiento = fecha_fallecimiento;
         this.lista_tareas = lista_tareas;
         this.contrasenya = contrasenya;
     }
@@ -61,10 +55,7 @@ public class Empleado {
         this.direccion = "";
         this.telefono = 0;
         this.localidad = "";
-        this.codigo_postal = "";
-        this.esta_muerto = false;
         this.fecha_nacimiento = new Date();
-        this.fecha_fallecimiento = new Date();
         this.lista_tareas = new ArrayList();
     }
 
@@ -75,10 +66,7 @@ public class Empleado {
         this.direccion = empleado.getDireccion();
         this.telefono = empleado.getTelefono();
         this.localidad = empleado.getLocalidad();
-        this.codigo_postal = empleado.getCodigo_postal();
-        this.esta_muerto = empleado.isEsta_muerto();
         this.fecha_nacimiento = empleado.getFecha_nacimiento();
-        this.fecha_fallecimiento = empleado.getFecha_fallecimiento();
         this.lista_tareas = empleado.getLista_tareas();
         this.id_Empleado = empleado.getId();
     }
@@ -152,36 +140,12 @@ public class Empleado {
         this.localidad = localidad;
     }
 
-    public String getCodigo_postal() {
-        return codigo_postal;
-    }
-
-    public void setCodigo_postal(String codigo_postal) {
-        this.codigo_postal = codigo_postal;
-    }
-
-    public boolean isEsta_muerto() {
-        return esta_muerto;
-    }
-
-    public void setEsta_muerto(boolean esta_muerto) {
-        this.esta_muerto = esta_muerto;
-    }
-
     public Date getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
     public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
-    }
-
-    public Date getFecha_fallecimiento() {
-        return fecha_fallecimiento;
-    }
-
-    public void setFecha_fallecimiento(Date fecha_fallecimiento) {
-        this.fecha_fallecimiento = fecha_fallecimiento;
     }
 
     public ArrayList<Tarea> getLista_tareas() {
