@@ -153,17 +153,6 @@ public class Controlador_Aplicacion {
 
     @FXML
     public void iniciar_sesion() {
-
-        try {
-            for (int contador = 0; contador < conexionEmpleados.findAll().size(); contador++) {
-                //conexionEmpleados.findAll().get(contador).setContrasenya("1234");
-                System.out.println(conexionEmpleados.findAll().get(contador).getNombre() + " " + conexionEmpleados.findAll().get(contador).getContrasenya());
-            }
-
-        } catch (Exception ex) {
-
-        }
-
         try {
             if (conexionEmpleados.inicio_sesion(TextField_nombre_de_usuario_login.getText(), TextField_contrasenya_login.getText())) {
                 ocultar_desocultar("todo");
@@ -254,13 +243,10 @@ public class Controlador_Aplicacion {
                     TreeItem<Tarea> item = new TreeItem();
                     item.setValue(tarea);
                     rootItem.getChildren().add(item);
-                    try {
-                        if (tarea.getLista_subtareas().size() > 0) {
-                            rootItem.getChildren().add(crear_vista_arbol(tarea.getLista_subtareas()));
-                        }
-                    } catch (StackOverflowError e) {
-
+                    if (tarea.getLista_subtareas().size() > 0) {
+                        rootItem.getChildren().add(crear_vista_arbol(tarea.getLista_subtareas()));
                     }
+
                 }
             }
         } catch (Exception e) {
@@ -274,7 +260,7 @@ public class Controlador_Aplicacion {
     public void insertar_tarea() {
 
         try {
-            Tarea tarea = coger_o_poner_informacion_de_la_tarea(true);            
+            Tarea tarea = coger_o_poner_informacion_de_la_tarea(true);
             conexionTareas.insert(tarea);
             if (!subtarea) {
                 empleado.getLista_tareas().add(tarea);
@@ -283,7 +269,7 @@ public class Controlador_Aplicacion {
             actualizar_vista_usuario();
             subtarea = false;
         } catch (Exception ex) {
-            
+
         }
     }
 
@@ -497,11 +483,7 @@ public class Controlador_Aplicacion {
                     rootItem.add(new Tarea());
                     rootItem.add(tarea);
                     if (tarea.getLista_subtareas().size() >= 0) {
-                        try {
-                            rootItem.addAll(Llenar_lista_tareas(tarea.getLista_subtareas()));
-                        } catch (StackOverflowError e) {
-
-                        }
+                        rootItem.addAll(Llenar_lista_tareas(tarea.getLista_subtareas()));
                     }
                 }
             }
