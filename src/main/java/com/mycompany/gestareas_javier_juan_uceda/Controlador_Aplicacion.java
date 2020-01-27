@@ -139,9 +139,8 @@ public class Controlador_Aplicacion {
         conexionEmpleados = new EmpleadosDAO();
         conexionTareas = new TareasDAO();
         tareas_lista = new ArrayList();
-        //ocultar_desocultar("login");
         if (nuevo_usuario) {
-            coger_informacion_de_empleado(false);
+            coger_o_poner_informacion_de_empleado(false);
         }
 
         if (empleado != null) {
@@ -152,22 +151,13 @@ public class Controlador_Aplicacion {
 
     }
 
-    public void leer_subtareas(ArrayList<Tarea> lista_de_subtareas) {
-        for (Tarea subtarea : lista_de_subtareas) {
-            System.out.println(subtarea.getDescripcion());
-            if (subtarea.getLista_subtareas().size() > 0) {
-                leer_subtareas(subtarea.getLista_subtareas());
-            }
-        }
-    }
-
     @FXML
     public void iniciar_sesion() {
 
         try {
             for (int contador = 0; contador < conexionEmpleados.findAll().size(); contador++) {
-                conexionEmpleados.findAll().get(contador).setContrasenya("1234");
-                //System.out.println(conexionEmpleados.findAll().get(contador).getNombre() + " " + conexionEmpleados.findAll().get(contador).getContrasenya());
+                //conexionEmpleados.findAll().get(contador).setContrasenya("1234");
+                System.out.println(conexionEmpleados.findAll().get(contador).getNombre() + " " + conexionEmpleados.findAll().get(contador).getContrasenya());
             }
 
         } catch (Exception ex) {
@@ -176,10 +166,6 @@ public class Controlador_Aplicacion {
 
         try {
             if (conexionEmpleados.inicio_sesion(TextField_nombre_de_usuario_login.getText(), TextField_contrasenya_login.getText())) {
-
-                for (int contador = 0; contador < empleado.getLista_tareas().size(); contador++) {
-                    leer_subtareas(empleado.getLista_tareas());
-                }
                 ocultar_desocultar("todo");
                 actualizar_vista_usuario();
             } else {
@@ -192,7 +178,6 @@ public class Controlador_Aplicacion {
 
     public void actualizar_vista_usuario() {
         try {
-            conexionEmpleados.update(empleado);
             Collections.sort((empleado.getLista_tareas()));
             TextField_nombre_de_usuario_login.setText(empleado.getNombre());
             ArrayList<Tarea> lista_tareas = empleado.getLista_tareas();
@@ -233,7 +218,7 @@ public class Controlador_Aplicacion {
 
         try {
             tarea_seleccionada = new Tarea(tareas_lista.get(treeview_vista.getSelectionModel().getSelectedIndex()));
-            coger_informacion_de_la_tarea(false);
+            coger_o_poner_informacion_de_la_tarea(false);
         } catch (Exception ex) {
 
         }
@@ -251,7 +236,6 @@ public class Controlador_Aplicacion {
     public void Anyadir_una_subtarea() {
         try {
             subtarea = true;
-
             insertar_tarea();
             Tarea tarea = new Tarea(ComboBox_Empleados_subtareas.getSelectionModel().getSelectedItem());
             tarea.getLista_subtareas().add(tarea_seleccionada);
@@ -271,7 +255,7 @@ public class Controlador_Aplicacion {
                     item.setValue(tarea);
                     rootItem.getChildren().add(item);
                     try {
-                        if (tarea.getLista_subtareas().size() >= 0) {
+                        if (tarea.getLista_subtareas().size() > 0) {
                             rootItem.getChildren().add(crear_vista_arbol(tarea.getLista_subtareas()));
                         }
                     } catch (StackOverflowError e) {
@@ -290,16 +274,16 @@ public class Controlador_Aplicacion {
     public void insertar_tarea() {
 
         try {
-            Tarea tarea = coger_informacion_de_la_tarea(true);
+            Tarea tarea = coger_o_poner_informacion_de_la_tarea(true);            
             conexionTareas.insert(tarea);
             if (!subtarea) {
                 empleado.getLista_tareas().add(tarea);
+                conexionEmpleados.update(empleado);
             }
-
             actualizar_vista_usuario();
             subtarea = false;
         } catch (Exception ex) {
-
+            
         }
     }
 
@@ -323,7 +307,7 @@ public class Controlador_Aplicacion {
         }
     }
 
-    private Empleado coger_informacion_de_empleado(boolean coger) {
+    private Empleado coger_o_poner_informacion_de_empleado(boolean coger) {
         Empleado Empleado_creado = null;
 
         try {
@@ -365,7 +349,7 @@ public class Controlador_Aplicacion {
         return Empleado_creado;
     }
 
-    private Tarea coger_informacion_de_la_tarea(boolean coger) {
+    private Tarea coger_o_poner_informacion_de_la_tarea(boolean coger) {
         Tarea Tarea_creada = null;
 
         try {
@@ -399,7 +383,7 @@ public class Controlador_Aplicacion {
     @FXML
     public void modificar_tarea() {
         try {
-            conexionTareas.update(coger_informacion_de_la_tarea(true));
+            conexionTareas.update(coger_o_poner_informacion_de_la_tarea(true));
             ComboBox_Empleados_Compartir.getItems().setAll(conexionEmpleados.findAll());
             actualizar_vista_usuario();
         } catch (Exception ex) {
@@ -410,11 +394,10 @@ public class Controlador_Aplicacion {
     @FXML
     public void eliminar_tarea() {
         try {
-            empleado.getLista_tareas().remove(tarea_seleccionada);
             conexionTareas.delete(tarea_seleccionada.getId_tarea());
-            ArrayList<Tarea> lista_tareas = empleado.getLista_tareas();
-            lista_tareas.remove(tarea_seleccionada);
+            empleado.getLista_tareas().remove(tarea_seleccionada);
             actualizar_vista_usuario();
+            App.Cambiar_Pantalla("tareas.fxml");
         } catch (Exception ex) {
 
         }

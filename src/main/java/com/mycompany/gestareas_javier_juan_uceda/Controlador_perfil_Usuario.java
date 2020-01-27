@@ -157,7 +157,7 @@ public class Controlador_perfil_Usuario {
                 Empleado_creado.setLocalidad(TextField_localidad.getText());
                 Empleado_creado.setFecha_nacimiento(Date.from(Instant.from(fecha_de_nacimiento_login.getValue().atStartOfDay(ZoneId.systemDefault()))));
                 Empleado_creado.setNombre(TextField_nombre_de_usuario.getText());
-                Empleado_creado.setContrasenya(TextField_contrasenya_login1.getText() == null ? empleado.getContrasenya() : TextField_contrasenya_login1.getText());
+                Empleado_creado.setContrasenya(TextField_contrasenya_login1.getText() == null || TextField_contrasenya_login1.getText().isEmpty() ? empleado.getContrasenya() : TextField_contrasenya_login1.getText());
                 Empleado_creado.setPrimer_apellido(TextField_primer_apellido.getText());
                 Empleado_creado.setSegundo_apellido(TextField_segundo_apellido.getText());
                 Empleado_creado.setLista_tareas(empleado.getLista_tareas());

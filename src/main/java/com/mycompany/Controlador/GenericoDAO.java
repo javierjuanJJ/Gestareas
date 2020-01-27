@@ -20,6 +20,6 @@ public interface GenericoDAO<Tipo> {
     boolean update(Tipo t) throws Exception;
 
     boolean delete(int id) throws Exception;
-    List<Tipo> findByExample(Object example) throws Exception;
+    List<Tipo> findByExample(Tipo example) throws Exception;
 
 }

@@ -24,7 +24,6 @@ public class TareasDAO implements GenericoDAO<Tarea> {
         } catch (Exception ex) {
 
         }
-
     }
 
     @Override
@@ -32,7 +31,6 @@ public class TareasDAO implements GenericoDAO<Tarea> {
         TypedQuery<Tarea> query = conexion.createQuery("SELECT c FROM Tarea c WHERE c.id_tarea= " + id, Tarea.class);
         List<Tarea> Articulos_recibidos = query.getResultList();
         return Articulos_recibidos.get(0);
-
     }
 
     @Override
@@ -40,7 +38,6 @@ public class TareasDAO implements GenericoDAO<Tarea> {
         TypedQuery<Tarea> query = conexion.createQuery("SELECT c FROM Tarea c", Tarea.class);
         List<Tarea> Articulos_recibidos = query.getResultList();
         return Articulos_recibidos;
-
     }
 
     @Override
@@ -50,7 +47,6 @@ public class TareasDAO implements GenericoDAO<Tarea> {
 
     @Override
     public boolean insert(Tarea t) throws Exception {
-
         conexion.getTransaction().begin();
         conexion.persist(t);
         conexion.getTransaction().commit();
@@ -73,14 +69,9 @@ public class TareasDAO implements GenericoDAO<Tarea> {
             conexion.getTransaction().begin();
             conexion.remove(tarea);
             conexion.getTransaction().commit();
-            try {
-                if (tarea.getLista_subtareas().size() > 0) {
-                    eliminar_subtareas(tarea.getLista_subtareas());
-                }
-            } catch (StackOverflowError e) {
-
+            if (tarea.getLista_subtareas().size() > 0) {
+                eliminar_subtareas(tarea.getLista_subtareas());
             }
-
         }
     }
 
@@ -90,13 +81,14 @@ public class TareasDAO implements GenericoDAO<Tarea> {
         conexion.getTransaction().begin();
         conexion.remove(employee);
         conexion.getTransaction().commit();
-        eliminar_subtareas(employee.getLista_subtareas());       
+        Controlador_Aplicacion.empleado.getLista_tareas().remove(employee);
+        eliminar_subtareas(employee.getLista_subtareas());
         return true;
 
     }
 
     @Override
-    public List<Tarea> findByExample(Object example) throws Exception {
+    public List<Tarea> findByExample(Tarea example) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
