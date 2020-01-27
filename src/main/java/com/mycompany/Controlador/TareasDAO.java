@@ -2,6 +2,7 @@ package com.mycompany.Controlador;
 
 import com.mycompany.Modelo.Tarea;
 import com.mycompany.gestareas_javier_juan_uceda.Controlador_Aplicacion;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -67,12 +68,29 @@ public class TareasDAO implements GenericoDAO<Tarea> {
         return true;
     }
 
+    private void eliminar_subtareas(ArrayList<Tarea> lista_subtareas) {
+        for (Tarea tarea : lista_subtareas) {
+            conexion.getTransaction().begin();
+            conexion.remove(tarea);
+            conexion.getTransaction().commit();
+            try {
+                if (tarea.getLista_subtareas().size() > 0) {
+                    eliminar_subtareas(tarea.getLista_subtareas());
+                }
+            } catch (StackOverflowError e) {
+
+            }
+
+        }
+    }
+
     @Override
     public boolean delete(int id) throws Exception {
         Tarea employee = conexion.find(Tarea.class, id);
         conexion.getTransaction().begin();
         conexion.remove(employee);
         conexion.getTransaction().commit();
+        eliminar_subtareas(employee.getLista_subtareas());       
         return true;
 
     }

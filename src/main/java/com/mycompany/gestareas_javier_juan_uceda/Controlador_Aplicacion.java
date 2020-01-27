@@ -152,6 +152,15 @@ public class Controlador_Aplicacion {
 
     }
 
+    public void leer_subtareas(ArrayList<Tarea> lista_de_subtareas) {
+        for (Tarea subtarea : lista_de_subtareas) {
+            System.out.println(subtarea.getDescripcion());
+            if (subtarea.getLista_subtareas().size() > 0) {
+                leer_subtareas(subtarea.getLista_subtareas());
+            }
+        }
+    }
+
     @FXML
     public void iniciar_sesion() {
 
@@ -160,12 +169,17 @@ public class Controlador_Aplicacion {
                 conexionEmpleados.findAll().get(contador).setContrasenya("1234");
                 //System.out.println(conexionEmpleados.findAll().get(contador).getNombre() + " " + conexionEmpleados.findAll().get(contador).getContrasenya());
             }
+
         } catch (Exception ex) {
 
         }
 
         try {
             if (conexionEmpleados.inicio_sesion(TextField_nombre_de_usuario_login.getText(), TextField_contrasenya_login.getText())) {
+
+                for (int contador = 0; contador < empleado.getLista_tareas().size(); contador++) {
+                    leer_subtareas(empleado.getLista_tareas());
+                }
                 ocultar_desocultar("todo");
                 actualizar_vista_usuario();
             } else {
@@ -237,6 +251,7 @@ public class Controlador_Aplicacion {
     public void Anyadir_una_subtarea() {
         try {
             subtarea = true;
+
             insertar_tarea();
             Tarea tarea = new Tarea(ComboBox_Empleados_subtareas.getSelectionModel().getSelectedItem());
             tarea.getLista_subtareas().add(tarea_seleccionada);
@@ -277,8 +292,12 @@ public class Controlador_Aplicacion {
         try {
             Tarea tarea = coger_informacion_de_la_tarea(true);
             conexionTareas.insert(tarea);
-            empleado.getLista_tareas().add(tarea);
+            if (!subtarea) {
+                empleado.getLista_tareas().add(tarea);
+            }
+
             actualizar_vista_usuario();
+            subtarea = false;
         } catch (Exception ex) {
 
         }

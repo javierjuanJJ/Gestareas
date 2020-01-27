@@ -137,6 +137,7 @@ public class Controlador_perfil_Usuario {
             conexionTareas = new TareasDAO();
             tareas_lista = new ArrayList();
             empleado = Controlador_Aplicacion.empleado != null ? Controlador_Aplicacion.empleado : new Empleado();
+           
             coger_informacion_de_empleado(false);
 
         } catch (Exception ex) {

@@ -6,6 +6,7 @@
 package com.mycompany.Controlador;
 
 import com.mycompany.Modelo.Empleado;
+import com.mycompany.Modelo.Tarea;
 import com.mycompany.gestareas_javier_juan_uceda.Controlador_Aplicacion;
 import com.mycompany.gestareas_javier_juan_uceda.Controlador_perfil_Usuario;
 import java.util.ArrayList;
@@ -70,12 +71,22 @@ public class EmpleadosDAO implements GenericoDAO<Empleado> {
         return true;
     }
     
+    public void eliminar_subtareas (ArrayList<Tarea> lista_de_subtareas){
+        for (Tarea subtarea: lista_de_subtareas){
+            conexion.getTransaction().begin();
+            conexion.remove(subtarea);
+            conexion.getTransaction().commit();
+            if (subtarea.getLista_subtareas().size() > 0)  eliminar_subtareas(subtarea.getLista_subtareas());
+        }
+    }
+    
     @Override
     public boolean delete(int id) throws Exception {
         Empleado employee = conexion.find(Empleado.class, id);
         conexion.getTransaction().begin();
         conexion.remove(employee);
         conexion.getTransaction().commit();
+        eliminar_subtareas(employee.getLista_tareas());
         return true;
     }
     
