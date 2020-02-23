@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.Controlador;
+package com.mycompany.dao;
 
 import com.mycompany.Modelo.Empleado;
 import com.mycompany.Modelo.Tarea;
@@ -21,17 +21,10 @@ import javax.persistence.TypedQuery;
  */
 public class EmpleadosDAO implements GenericoDAO<Empleado> {
 
-    private static EntityManagerFactory emf;
     private static EntityManager conexion;
 
-    public EmpleadosDAO() {
-        try {
-            emf = Conexion.getConnectionemf();
-            conexion = Conexion.getConnectionem();
-        } catch (Exception ex) {
-
-        }
-
+    public EmpleadosDAO() throws Exception {
+        conexion = Conexion.getConnectionem();
     }
 
     @Override
@@ -58,6 +51,7 @@ public class EmpleadosDAO implements GenericoDAO<Empleado> {
 
         if (findByExample(t).isEmpty()) {
             conexion.getTransaction().begin();
+            t.setIdEmpleado(0);
             conexion.persist(t);
             conexion.getTransaction().commit();
         }
@@ -116,10 +110,8 @@ public class EmpleadosDAO implements GenericoDAO<Empleado> {
     @Override
     public List<Empleado> findByExample(Empleado example) throws Exception {
         Empleado empleado = (Empleado) example;
-        List<Empleado> Articulos_recibidos = new ArrayList();
         TypedQuery<Empleado> query = conexion.createQuery("SELECT c FROM Empleado c WHERE c.nombre= '" + empleado.getNombre() + "' AND c.contrasenya='" + empleado.getContrasenya()+"'", Empleado.class);
-        Articulos_recibidos.addAll(query.getResultList());
-        return Articulos_recibidos;
+        return query.getResultList();
     }
 
 }

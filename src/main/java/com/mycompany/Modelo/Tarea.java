@@ -3,8 +3,10 @@ package com.mycompany.Modelo;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -20,6 +22,7 @@ public class Tarea implements Comparable<Tarea> {
     private Date fecha_de_finalizacion;
     private String descripcion;
     private boolean esta_realizada;
+    @OneToMany(fetch=FetchType.EAGER)
     private ArrayList<Tarea> lista_subtareas;
 
     public Tarea(Date fecha_de_alta, Date fecha_de_finalizacion, String descripcion, ArrayList<Tarea> lista_subtareas) {

@@ -5,8 +5,8 @@
  */
 package com.mycompany.gestareas_javier_juan_uceda;
 
-import com.mycompany.Controlador.EmpleadosDAO;
-import com.mycompany.Controlador.TareasDAO;
+import com.mycompany.dao.EmpleadosDAO;
+import com.mycompany.dao.TareasDAO;
 import com.mycompany.Modelo.Empleado;
 import com.mycompany.Modelo.Tarea;
 import java.io.IOException;

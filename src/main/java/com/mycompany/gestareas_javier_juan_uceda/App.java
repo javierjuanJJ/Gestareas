@@ -22,6 +22,9 @@ public class App extends Application {
         scene = new Scene(loadFXML("tareas.fxml"));
         stage.setScene(scene);
         Stage = stage;
+        App.Stage.setMaximized(false);
+        App.Stage.setFullScreen(false);
+        App.Stage.setResizable(false);
         Stage.setTitle("Pantalla inicial");
         Stage.show();
 

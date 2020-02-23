@@ -1,4 +1,4 @@
-package com.mycompany.Controlador;
+package com.mycompany.dao;
 
 import com.mycompany.Modelo.Tarea;
 import com.mycompany.gestareas_javier_juan_uceda.Controlador_Aplicacion;
@@ -14,16 +14,10 @@ import javax.persistence.TypedQuery;
  */
 public class TareasDAO implements GenericoDAO<Tarea> {
 
-    private static EntityManagerFactory emf;
     private static EntityManager conexion;
 
-    public TareasDAO() {
-        try {
-            emf = Conexion.getConnectionemf();
-            conexion = Conexion.getConnectionem();
-        } catch (Exception ex) {
-
-        }
+    public TareasDAO() throws Exception {
+        conexion = Conexion.getConnectionem();
     }
 
     @Override
@@ -48,6 +42,7 @@ public class TareasDAO implements GenericoDAO<Tarea> {
     @Override
     public boolean insert(Tarea t) throws Exception {
         conexion.getTransaction().begin();
+        t.setId(0);
         conexion.persist(t);
         conexion.getTransaction().commit();
         Controlador_Aplicacion.tarea_seleccionada = new Tarea(t);

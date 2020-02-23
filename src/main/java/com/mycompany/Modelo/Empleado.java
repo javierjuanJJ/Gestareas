@@ -12,8 +12,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -34,6 +36,7 @@ public class Empleado {
     private String localidad;  
     private String contrasenya;
     private Date fecha_nacimiento;
+    @OneToMany(fetch=FetchType.EAGER)
     private ArrayList<Tarea> lista_tareas;
 
     public Empleado(String nombre, String primer_apellido, String segundo_apellido, String direccion, int telefono, String localidad, boolean esta_muerto, Date fecha_nacimiento, String contrasenya, ArrayList<Tarea> lista_tareas) {
@@ -69,6 +72,7 @@ public class Empleado {
         this.fecha_nacimiento = empleado.getFecha_nacimiento();
         this.lista_tareas = empleado.getLista_tareas();
         this.id_Empleado = empleado.getId();
+        this.contrasenya = empleado.getContrasenya();
     }
 
     public void clone(Empleado empleado) {

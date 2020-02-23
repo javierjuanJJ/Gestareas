@@ -5,8 +5,8 @@
  */
 package com.mycompany.gestareas_javier_juan_uceda;
 
-import com.mycompany.Controlador.EmpleadosDAO;
-import com.mycompany.Controlador.TareasDAO;
+import com.mycompany.dao.EmpleadosDAO;
+import com.mycompany.dao.TareasDAO;
 import com.mycompany.Modelo.Empleado;
 import com.mycompany.Modelo.Tarea;
 import java.io.IOException;
@@ -142,18 +142,22 @@ public class Controlador_Aplicacion {
             conexionEmpleados = new EmpleadosDAO();
             conexionTareas = new TareasDAO();
             tareas_lista = new ArrayList();
-            
+
+            for (Empleado empleado : conexionEmpleados.findAll()) {
+                System.out.println(empleado.getNombre() + " " + empleado.getContrasenya());
+            }
+
             if (nuevo_usuario) {
                 coger_o_poner_informacion_de_empleado(false);
             }
-            
+
             if (empleado != null) {
                 actualizar_vista_usuario();
             } else {
                 ocultar_desocultar("login");
             }
         } catch (Exception ex) {
-            
+
         }
 
     }
@@ -174,9 +178,9 @@ public class Controlador_Aplicacion {
 
     public void actualizar_vista_usuario() {
         try {
-            Collections.sort((empleado.getLista_tareas()));
-            TextField_nombre_de_usuario_login.setText(empleado.getNombre());
             ArrayList<Tarea> lista_tareas = empleado.getLista_tareas();
+            Collections.sort(lista_tareas);
+            TextField_nombre_de_usuario_login.setText(empleado.getNombre());
             ComboBox_Empleados_Compartir.getItems().setAll(conexionEmpleados.findAll());
             tareas_lista = Llenar_lista_tareas(lista_tareas);
             Llenar_tree();
@@ -213,7 +217,8 @@ public class Controlador_Aplicacion {
     public void Poner_tarea_tree() {
 
         try {
-            tarea_seleccionada = new Tarea(tareas_lista.get(treeview_vista.getSelectionModel().getSelectedIndex()));
+            System.out.println(treeview_vista.getSelectionModel().getSelectedIndex() - 1);
+            tarea_seleccionada = new Tarea(tareas_lista.get(treeview_vista.getSelectionModel().getSelectedIndex() - 1));
             coger_o_poner_informacion_de_la_tarea(false);
         } catch (Exception ex) {
 
@@ -223,6 +228,7 @@ public class Controlador_Aplicacion {
     public void Llenar_tree() {
         try {
             treeview_vista.setRoot(crear_vista_arbol(empleado.getLista_tareas()));
+            treeview_vista.setRoot(treeview_vista.getTreeItem(0));
         } catch (Exception ex) {
 
         }
@@ -231,13 +237,14 @@ public class Controlador_Aplicacion {
     @FXML
     public void Anyadir_una_subtarea() {
         try {
-            subtarea = true;
-            insertar_tarea();
-            Tarea tarea = new Tarea(ComboBox_Empleados_subtareas.getSelectionModel().getSelectedItem());
+            Tarea tarea = empleado.getLista_tareas().get(ComboBox_Empleados_subtareas.getSelectionModel().getSelectedIndex());
+            tarea_seleccionada = new Tarea(coger_o_poner_informacion_de_la_tarea(true));
+            tarea_seleccionada.setId(0);
+            conexionTareas.insert(tarea_seleccionada);
             tarea.getLista_subtareas().add(tarea_seleccionada);
             actualizar_vista_usuario();
         } catch (Exception ex) {
-
+          ex.printStackTrace();
         }
     }
 
@@ -250,10 +257,14 @@ public class Controlador_Aplicacion {
                     TreeItem<Tarea> item = new TreeItem();
                     item.setValue(tarea);
                     rootItem.getChildren().add(item);
-                    if (tarea.getLista_subtareas().size() > 0) {
-                        rootItem.getChildren().add(crear_vista_arbol(tarea.getLista_subtareas()));
-                    }
+                    tarea.getLista_subtareas().removeIf(n -> (n.equals(tarea)));
+                    if ((!tarea.getLista_subtareas().isEmpty())) {   
+                        try {
+                            rootItem.getChildren().add(crear_vista_arbol(tarea.getLista_subtareas()));
+                        } catch (StackOverflowError ex) {
 
+                        }
+                    }
                 }
             }
         } catch (Exception e) {
@@ -269,10 +280,8 @@ public class Controlador_Aplicacion {
         try {
             Tarea tarea = coger_o_poner_informacion_de_la_tarea(true);
             conexionTareas.insert(tarea);
-            if (!subtarea) {
-                empleado.getLista_tareas().add(tarea);
-                conexionEmpleados.update(empleado);
-            }
+            empleado.getLista_tareas().add(tarea);
+            conexionEmpleados.update(empleado);
             actualizar_vista_usuario();
             subtarea = false;
         } catch (Exception ex) {
@@ -388,7 +397,11 @@ public class Controlador_Aplicacion {
     public void eliminar_tarea() {
         try {
             conexionTareas.delete(tarea_seleccionada.getId_tarea());
-            empleado.getLista_tareas().remove(tarea_seleccionada);
+
+            for (Empleado empleado : this.ComboBox_Empleados_Compartir.getItems()) {
+                empleado.getLista_tareas().remove(tarea_seleccionada);
+            }
+
             actualizar_vista_usuario();
             App.Cambiar_Pantalla("tareas.fxml");
         } catch (Exception ex) {
@@ -487,10 +500,16 @@ public class Controlador_Aplicacion {
         try {
             for (Tarea tarea : lista_tareas) {
                 if ((!tarea.equals(new Tarea())) && (tarea.esta_entre(new Date()))) {
-                    rootItem.add(new Tarea());
                     rootItem.add(tarea);
+                    tarea.getLista_subtareas().removeIf(n -> (n.equals(tarea)));
                     if (tarea.getLista_subtareas().size() >= 0) {
-                        rootItem.addAll(Llenar_lista_tareas(tarea.getLista_subtareas()));
+                        try {
+                            //rootItem.add(new Tarea());
+                            rootItem.addAll(Llenar_lista_tareas(tarea.getLista_subtareas()));
+                        } catch (StackOverflowError ex) {
+
+                        }
+
                     }
                 }
             }
